@@ -15,20 +15,57 @@ export function activate(context: vscode.ExtensionContext) {
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
-
-        var editor = vscode.window.activeTextEditor;
+        const editor = vscode.window.activeTextEditor;
 
         if (!editor) {
             return;
         }
 
-        var selection = editor.selection;
-        var text = editor.document.getText(selection);
+        triggerUpdateDecorations();
 
-        // Display a message box to the user
-        // vscode.window.showInformationMessage('Selected characters: ' + text.length);
-        // vscode.window.showInformationMessage('Hello World!');
+        var timeout = null;
+        function triggerUpdateDecorations() {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            
+            timeout = setTimeout(updateDecorations, 500);
+        }
+
+        const smallNumberDecorationType = vscode.window.createTextEditorDecorationType({
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            overviewRulerColor: 'blue',
+            overviewRulerLane: vscode.OverviewRulerLane.Right,
+            light: {
+                borderColor: 'darkblue'
+            },
+            dark: {
+                borderColor: 'lightblue'
+            }
+        });
+
+        function updateDecorations() {
+            if (!editor) {
+                return;
+            }
+
+            const regEx = /use (.*);/g;
+            const text = editor.document.getText();
+            const smallNumbers: vscode.DecorationOptions[] = [];
+            let match;
+
+            while (match = regEx.exec(text)) {
+                const startPos = editor.document.positionAt(match.index);
+                const endPos = editor.document.positionAt(match.index + match[0].length);
+                const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Number **' + match[0] + '**' };
+
+                if (match[0].length) {
+                    smallNumbers.push(decoration);
+                }
+            }
+            editor.setDecorations(smallNumberDecorationType, smallNumbers);
+        }
     });
 
     context.subscriptions.push(disposable);
@@ -36,8 +73,4 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-}
-
-export class UseStatementChecker {
-
 }
