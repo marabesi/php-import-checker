@@ -1,19 +1,11 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
     console.log('php-import-checker" is now active!');
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         const editor = vscode.window.activeTextEditor;
 
@@ -32,9 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
             timeout = setTimeout(updateDecorations, 500);
         }
 
-        const smallNumberDecorationType = vscode.window.createTextEditorDecorationType({
-            borderWidth: '1px',
-            borderStyle: 'solid',
+        const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
+            backgroundColor: 'rgba(255,0,0, 0.5)',
             overviewRulerColor: 'blue',
             overviewRulerLane: vscode.OverviewRulerLane.Right,
             light: {
@@ -52,25 +43,33 @@ export function activate(context: vscode.ExtensionContext) {
 
             const regEx = /use (.*);/g;
             const text = editor.document.getText();
-            const smallNumbers: vscode.DecorationOptions[] = [];
-            let match;
-
+            let smallNumbers: vscode.DecorationOptions[] = [];
+            let match = regEx.exec(text);
+            
             while (match = regEx.exec(text)) {
+                let splitNameSpace = match[1].split('\\');
+                let className = splitNameSpace[splitNameSpace.length - 1];
+                
+                let found = (text.match(new RegExp(className, 'g')) || []).length;
+                
+                if (found >= 2) {
+                    continue;
+                }
+
                 const startPos = editor.document.positionAt(match.index);
                 const endPos = editor.document.positionAt(match.index + match[0].length);
-                const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Number **' + match[0] + '**' };
+                const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Unused class' };
 
                 if (match[0].length) {
                     smallNumbers.push(decoration);
                 }
             }
-            editor.setDecorations(smallNumberDecorationType, smallNumbers);
+            editor.setDecorations(unusedNamespaceDecorationType, smallNumbers);
         }
     });
 
     context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
 }
