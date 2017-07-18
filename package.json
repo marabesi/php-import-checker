@@ -1,7 +1,7 @@
 {
     "name": "php-import-checker",
     "displayName": "PHP import checker",
-    "description": "Know when you are importing a class and is not using in the file, easy and fast, inspired by PHPStorm",
+    "description": "Know when you are importing a class and is not using it in the file, easy and fast, inspired by PHPStorm",
     "version": "0.0.1",
     "publisher": "marabesi",
     "engines": {
@@ -19,7 +19,7 @@
         "commands": [
             {
                 "command": "extension.sayHello",
-                "title": "Hello World"
+                "title": "Check PHP import"
             }
         ]
     },
