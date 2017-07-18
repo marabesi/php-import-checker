@@ -26,8 +26,6 @@ export function activate(context: vscode.ExtensionContext) {
 
         const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
             backgroundColor: 'rgba(255,0,0, 0.5)',
-            overviewRulerColor: 'blue',
-            overviewRulerLane: vscode.OverviewRulerLane.Right,
             light: {
                 borderColor: 'darkblue'
             },
@@ -36,6 +34,10 @@ export function activate(context: vscode.ExtensionContext) {
             }
         });
 
+        let normalDecoration = vscode.window.createTextEditorDecorationType(<vscode.DecorationRenderOptions> {
+            textDecoration: 'none; opacity: 1'
+        });
+        
         function updateDecorations() {
             if (!editor) {
                 return;
@@ -51,20 +53,38 @@ export function activate(context: vscode.ExtensionContext) {
                 let className = splitNameSpace[splitNameSpace.length - 1];
                 
                 let found = (text.match(new RegExp(className, 'g')) || []).length;
-                
-                if (found >= 2) {
-                    continue;
-                }
 
                 const startPos = editor.document.positionAt(match.index);
                 const endPos = editor.document.positionAt(match.index + match[0].length);
                 const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Unused class' };
 
-                if (match[0].length) {
+                if (match[0].length && found < 2) {
                     smallNumbers.push(decoration);
+                } else {
+                    highlightSelections(editor, []);
                 }
             }
             editor.setDecorations(unusedNamespaceDecorationType, smallNumbers);
+        }
+
+        function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range[]) {
+            if (!normalDecoration) return;
+
+            let ranges: vscode.Range[] = [];
+            let context = 0;
+            
+            selections.forEach(s => {
+                if (context < 0) {
+                    ranges.push(s);
+                }
+                else {
+                    ranges.push(new vscode.Range(
+                        new vscode.Position(Math.max(s.start.line - context, 0), 0),
+                        new vscode.Position(s.end.line + context, Number.MAX_VALUE)
+                    ));
+                }
+            });
+            editor.setDecorations(normalDecoration, ranges);
         }
     });
 
