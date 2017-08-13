@@ -5,7 +5,7 @@ import * as vscode from 'vscode';
 let context = 0;
 
 let normalDecoration = vscode.window.createTextEditorDecorationType(<vscode.DecorationRenderOptions> {
-    textDecoration: 'none; opacity: 1'
+    textDecoration: 'none; opacity: 1',
 });
 
 export function activate(context: vscode.ExtensionContext) {

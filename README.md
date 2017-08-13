@@ -1,6 +1,6 @@
 # php-import-checker README
 
-This is the README for your extension "php-import-checker". After writing up a brief description, we recommend including the following sections.
+php-import-checker helps you know when a given class is imported but not used, providing a easy way to keep your code clean and organized.
 
 ## Features
 
