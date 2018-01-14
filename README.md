@@ -16,6 +16,14 @@ For example if there is an image subfolder under your extension project workspac
 
 Visual Code 1.14 +
 
+### 0.0.3
+
+- Changed the project icon
+
+### 0.0.2
+
+- Added better support with a demo gif in the README
+
 ### 0.0.1
 
 - Ability to see unused imports in the PHP class
