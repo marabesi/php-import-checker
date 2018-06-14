@@ -45,12 +45,33 @@ export function activate(context: vscode.ExtensionContext) {
             resetAllDecorations();
 
             const regEx = /use (.*);/g;
-            const text = editor.document.getText();
+
+            const classRegEx = /\s*class [a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]* .*/g;
+
+            let line = 0;
+            for (; line <= editor.document.lineCount; line++) {
+                let tl = editor.document.lineAt(line);
+                let match = classRegEx.exec(tl.text);
+                if (match) {
+                    break;
+                }
+            }
+
+            const preclass_text = editor.document.getText(new vscode.Range(
+                new vscode.Position(0, 0),
+                new vscode.Position(line, 0)
+            ));
+
+            const text = editor.document.getText(new vscode.Range(
+                new vscode.Position(line, 0),
+                new vscode.Position(editor.document.lineCount, 0)
+            ));
+
             let smallNumbers: vscode.DecorationOptions[] = [];
 
-            while (match = regEx.exec(text)) {
             let match;
 
+            while (match = regEx.exec(preclass_text)) {
                 let splitNameSpace = match[1].split('\\');
                 let className = splitNameSpace[splitNameSpace.length - 1];
                 
