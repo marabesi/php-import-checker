@@ -47,9 +47,10 @@ export function activate(context: vscode.ExtensionContext) {
             const regEx = /use (.*);/g;
             const text = editor.document.getText();
             let smallNumbers: vscode.DecorationOptions[] = [];
-            let match = regEx.exec(text);
 
             while (match = regEx.exec(text)) {
+            let match;
+
                 let splitNameSpace = match[1].split('\\');
                 let className = splitNameSpace[splitNameSpace.length - 1];
                 
