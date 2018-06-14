@@ -9,8 +9,6 @@ let normalDecoration = vscode.window.createTextEditorDecorationType(<vscode.Deco
 });
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('php-import-checker" is now active!');
-
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         const editor = vscode.window.activeTextEditor;
 
@@ -25,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (timeout) {
                 clearTimeout(timeout);
             }
-            
+
             timeout = setTimeout(updateDecorations, 500);
         }
 
@@ -38,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
                 borderColor: 'lightblue'
             }
         });
-        
+
         function updateDecorations() {
             if (!editor) {
                 return;
@@ -89,7 +87,7 @@ function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range
     if (!normalDecoration) return;
 
     let ranges: vscode.Range[] = [];
-    
+
     selections.forEach(s => {
         if (context < 0) {
             ranges.push(s);
