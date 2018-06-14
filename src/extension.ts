@@ -74,14 +74,17 @@ export function activate(context: vscode.ExtensionContext) {
             while (match = regEx.exec(preclass_text)) {
                 let splitNameSpace = match[1].split('\\');
                 let className = splitNameSpace[splitNameSpace.length - 1];
-                
-                let found = (text.match(new RegExp(className, 'g')) || []).length;
+
+                let found_new = (text.match(new RegExp(`(new|extends|implements|use)\s+${className}`, 'g')) || []);
+                let found_static = (text.match(new RegExp(className + '::', 'g')) || []);
+                let found = (found_new.length + found_static.length) > 0;
+
 
                 const startPos = editor.document.positionAt(match.index);
                 const endPos = editor.document.positionAt(match.index + match[0].length);
                 const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Unused class' };
 
-                if (match[0].length && found < 2) {
+                if (match[0].length && !found) {
                     smallNumbers.push(decoration);
                 } else {
                     highlightSelections(editor, [new vscode.Range(startPos, endPos)]);
