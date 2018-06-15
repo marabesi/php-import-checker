@@ -17,6 +17,10 @@ For example if there is an image subfolder under your extension project workspac
 
 Visual Code 1.14 +
 
+### 0.1.3
+
+- Alias detection implemented (#4)
+
 ### 0.0.3
 
 - Changed the project icon

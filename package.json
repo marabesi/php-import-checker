@@ -2,7 +2,7 @@
     "name": "php-import-checker",
     "displayName": "PHP import checker",
     "description": "Know when you are importing a class and is not using it in the file, easy and fast, inspired by PHPStorm",
-    "version": "0.0.3",
+    "version": "0.1.3",
     "publisher": "marabesi",
     "icon": "arrows.png",
     "engines": {
@@ -11,6 +11,7 @@
     "categories": [
         "Other"
     ],
+    "repository": "https://github.com/marabesi/php-import-checker.git",
     "activationEvents": [
         "onCommand:extension.sayHello",
         "onLanguage:php"
