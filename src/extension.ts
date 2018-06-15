@@ -55,6 +55,11 @@ export function activate(context: vscode.ExtensionContext) {
                 let splitNameSpace = match[1].split('\\');
                 let className = splitNameSpace[splitNameSpace.length - 1];
                 
+                if (className.search(/ as /) > -1 ) {
+                    let splitAlias = className.split(' as ');
+                    className = splitAlias[splitAlias.length - 1].trim();
+                }
+                
                 let found = (text.match(new RegExp(className, 'g')) || []).length;
 
                 const startPos = editor.document.positionAt(match.index);
