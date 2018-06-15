@@ -44,15 +44,15 @@ export function activate(context: vscode.ExtensionContext) {
 
             resetAllDecorations();
 
-            const regEx = /use (.*);/g;
+            const regEx = /use ([^;]+);/g;
 
-            const classRegEx = /\s*class [a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]* .*/g;
+            const classRegExString = '[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*';
 
             let line = 0;
-            for (; line <= editor.document.lineCount; line++) {
+            for (; line < editor.document.lineCount; line++) {
                 let tl = editor.document.lineAt(line);
-                let match = classRegEx.exec(tl.text);
-                if (match) {
+                let match = getRegMatches(tl.text, `\\s*class\\s${classRegExString}.*`);
+                if (match.length) {
                     break;
                 }
             }
@@ -73,11 +73,17 @@ export function activate(context: vscode.ExtensionContext) {
 
             while (match = regEx.exec(preclass_text)) {
                 let splitNameSpace = match[1].split('\\');
+                splitNameSpace = splitNameSpace[splitNameSpace.length - 1].split(' as ');
                 let className = splitNameSpace[splitNameSpace.length - 1];
 
-                let found_new = (text.match(new RegExp(`(new|extends|implements|use)\s+${className}`, 'g')) || []);
-                let found_static = (text.match(new RegExp(className + '::', 'g')) || []);
-                let found = (found_new.length + found_static.length) > 0;
+                const match_instantiation = `(new|extends|implements|use)\\s${className}[^A-Za-z0-9]`;
+                const match_static = `[^A-Za-z0-9]${className}::`;
+                const match_mention = `[^A-Za-z0-9]${className}\\s+\\$.*`;
+
+                let found_new = getRegMatches(text, match_instantiation);
+                let found_static = getRegMatches(text, match_static);
+                let found_dependency = getRegMatches(text, match_mention);
+                let found = (found_new.length + found_static.length + found_dependency.length) > 0;
 
 
                 const startPos = editor.document.positionAt(match.index);
@@ -129,4 +135,8 @@ function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range
 
 export function deactivate() {
     resetAllDecorations();
+}
+
+function getRegMatches(text, regtext) {
+    return (text.match(new RegExp(regtext, 'gi')) || []);
 }
