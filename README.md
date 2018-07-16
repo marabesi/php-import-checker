@@ -19,7 +19,7 @@ Visual Code 1.14 +
 
 ### 0.1.3
 
-- Alias detection implemented (#4)
+- Alias detection implemented ([#4](https://github.com/marabesi/php-import-checker/pull/4))
 
 ### 0.0.3
 
