@@ -17,6 +17,12 @@ For example if there is an image subfolder under your extension project workspac
 
 Visual Code 1.14 +
 
+## Changelog
+
+### 0.1.4
+
+- Trigger import check after saving files ([#8](https://github.com/marabesi/php-import-checker/pull/8))
+
 ### 0.1.3
 
 - Alias detection implemented ([#4](https://github.com/marabesi/php-import-checker/pull/4))
