@@ -32,7 +32,7 @@ function generateHighlighting() {
 
     triggerUpdateDecorations();
 
-    var timeout = null;
+    let timeout: any = null;
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
