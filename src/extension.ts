@@ -30,7 +30,6 @@ function generateHighlighting() {
         return;
     }
 
-    triggerUpdateDecorations();
 
     let timeout: any = null;
     function triggerUpdateDecorations() {
@@ -40,6 +39,8 @@ function generateHighlighting() {
 
         timeout = setTimeout(updateDecorations, 500);
     }
+
+    triggerUpdateDecorations();
 
     const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
         backgroundColor: 'rgba(255,0,0, 0.5)',
@@ -60,7 +61,7 @@ function generateHighlighting() {
 
         const regEx = /use (.*);/g;
         const text = editor.document.getText();
-        let smallNumbers: vscode.DecorationOptions[] = [];
+        let unusedDecoration: vscode.DecorationOptions[] = [];
         let match = regEx.exec(text);
 
         while (match = regEx.exec(text)) {
@@ -79,13 +80,13 @@ function generateHighlighting() {
             const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Unused class' };
 
             if (match[0].length && found < 2) {
-                smallNumbers.push(decoration);
+                unusedDecoration.push(decoration);
             } else {
                 highlightSelections(editor, [new vscode.Range(startPos, endPos)]);
             }
         }
 
-        editor.setDecorations(unusedNamespaceDecorationType, smallNumbers);
+        editor.setDecorations(unusedNamespaceDecorationType, unusedDecoration);
     }
 }
 
