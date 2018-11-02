@@ -72,6 +72,7 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
     const regEx = /use (.*);/g;
     let match;
     let matches = [];
+    let isAlias = false;
     
     while (match = regEx.exec(text)) {
         let found = 0;
@@ -79,6 +80,7 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
         let className = splitNameSpace[splitNameSpace.length - 1];
 
         if (className.search(/ as /) > -1) {
+            isAlias = true;
             let splitAlias = className.split(' as ');
             className = splitAlias[splitAlias.length - 1].trim();
         }
@@ -90,10 +92,14 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
 
         if (match[0].length && found < 2) {
             matches.push({
+                isAlias: isAlias,
+                classname: className,
                 found: found,
                 ranges: [new vscode.Range(startPos, endPos)]
             });
         }
+
+        isAlias = false;
     }
 
     return matches;

@@ -16,6 +16,20 @@
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ]
+        },
+        {
+            "name": "Test php-import-checker",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--disable-extensions",
+                "--extensionDevelopmentPath=${workspaceFolder}",
+                "--extensionTestsPath=${workspaceFolder}/out/test"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/out/test/**/*.js"
+            ]
         }
     ]
 }
