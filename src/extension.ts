@@ -4,8 +4,17 @@ import * as vscode from 'vscode';
 
 let context = 0;
 
-let normalDecoration = vscode.window.createTextEditorDecorationType(<vscode.DecorationRenderOptions> {
-    textDecoration: 'none; opacity: 1',
+// keeps all the unused classes to highlight
+let ranges: vscode.Range[] = [];
+
+const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
+    backgroundColor: 'rgba(255,0,0, 0.5)',
+    light: {
+        borderColor: 'darkblue'
+    },
+    dark: {
+        borderColor: 'lightblue'
+    }
 });
 
 export function activate(context: vscode.ExtensionContext) {
@@ -16,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
             generateHighlighting();
         }
     });
+
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         generateHighlighting();
     });
@@ -30,7 +40,6 @@ function generateHighlighting() {
         return;
     }
 
-
     let timeout: any = null;
     function triggerUpdateDecorations() {
         if (timeout) {
@@ -42,26 +51,16 @@ function generateHighlighting() {
 
     triggerUpdateDecorations();
 
-    const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
-        backgroundColor: 'rgba(255,0,0, 0.5)',
-        light: {
-            borderColor: 'darkblue'
-        },
-        dark: {
-            borderColor: 'lightblue'
-        }
-    });
-
     function updateDecorations() {
         if (!editor) {
             return;
         }
 
-        resetAllDecorations();
+        // clean up the found matches
+        ranges = [];
 
         const regEx = /use (.*);/g;
         const text = editor.document.getText();
-        let unusedDecoration: vscode.DecorationOptions[] = [];
         let match = regEx.exec(text);
 
         while (match = regEx.exec(text)) {
@@ -77,16 +76,11 @@ function generateHighlighting() {
 
             const startPos = editor.document.positionAt(match.index);
             const endPos = editor.document.positionAt(match.index + match[0].length);
-            const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Unused class' };
 
             if (match[0].length && found < 2) {
-                unusedDecoration.push(decoration);
-            } else {
                 highlightSelections(editor, [new vscode.Range(startPos, endPos)]);
             }
         }
-
-        editor.setDecorations(unusedNamespaceDecorationType, unusedDecoration);
     }
 }
 
@@ -101,10 +95,6 @@ function resetDecorations(textEditor: vscode.TextEditor) {
 }
 
 function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range[]) {
-    if (!normalDecoration) return;
-
-    let ranges: vscode.Range[] = [];
-
     selections.forEach(s => {
         if (context < 0) {
             ranges.push(s);
@@ -116,7 +106,7 @@ function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range
         }
     });
 
-    editor.setDecorations(normalDecoration, ranges);
+    editor.setDecorations(unusedNamespaceDecorationType, ranges);
 }
 
 export function deactivate() {
