@@ -59,29 +59,44 @@ function generateHighlighting() {
         // clean up the found matches
         ranges = [];
 
-        const regEx = /use (.*);/g;
         const text = editor.document.getText();
-        let match = regEx.exec(text);
+        const search = findMatch(editor, text);
 
-        while (match = regEx.exec(text)) {
-            let splitNameSpace = match[1].split('\\');
-            let className = splitNameSpace[splitNameSpace.length - 1];
+        search.forEach((match: any) => {
+            highlightSelections(editor, match.ranges);
+        });
+    }
+}
 
-            if (className.search(/ as /) > -1 ) {
-                let splitAlias = className.split(' as ');
-                className = splitAlias[splitAlias.length - 1].trim();
-            }
+export function findMatch(editor: vscode.TextEditor, text: string): any {
+    const regEx = /use (.*);/g;
+    let match;
+    let matches = [];
+    
+    while (match = regEx.exec(text)) {
+        let found = 0;
+        let splitNameSpace = match[1].split('\\');
+        let className = splitNameSpace[splitNameSpace.length - 1];
 
-            let found = (text.match(new RegExp(className, 'g')) || []).length;
+        if (className.search(/ as /) > -1) {
+            let splitAlias = className.split(' as ');
+            className = splitAlias[splitAlias.length - 1].trim();
+        }
 
-            const startPos = editor.document.positionAt(match.index);
-            const endPos = editor.document.positionAt(match.index + match[0].length);
+        found = (text.match(new RegExp(className, 'g')) || []).length;
 
-            if (match[0].length && found < 2) {
-                highlightSelections(editor, [new vscode.Range(startPos, endPos)]);
-            }
+        const startPos = editor.document.positionAt(match.index);
+        const endPos = editor.document.positionAt(match.index + match[0].length);
+
+        if (match[0].length && found < 2) {
+            matches.push({
+                found: found,
+                ranges: [new vscode.Range(startPos, endPos)]
+            });
         }
     }
+
+    return matches;
 }
 
 function resetAllDecorations() {
