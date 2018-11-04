@@ -1,3 +1,8 @@
+/**
+ * For further reference, this extension was based on the decorator-sample
+ * available at https://github.com/Microsoft/vscode-extension-samples/blob/master/decorator-sample/src/extension.ts
+ */
+
 'use strict';
 
 import * as vscode from 'vscode';
@@ -20,10 +25,12 @@ const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationTy
 export function activate(context: vscode.ExtensionContext) {
     console.log('php-import-checker" is now active!');
 
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+        generateHighlighting();
+    }, null, context.subscriptions);
+
     vscode.workspace.onDidSaveTextDocument(callback => {
-        if (callback.languageId == 'php') {
-            generateHighlighting();
-        }
+        generateHighlighting();
     });
 
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
@@ -36,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
 function generateHighlighting() {
     const editor = vscode.window.activeTextEditor;
 
-    if (!editor) {
+    if (!editor || editor.document.languageId != 'php') {
         return;
     }
 
