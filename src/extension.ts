@@ -91,9 +91,11 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
             let splitAlias = className.split(' as ');
             className = splitAlias[splitAlias.length - 1].trim();
         }
-
-        found = (text.match(new RegExp(className, 'g')) || []).length;
-
+        
+        let test = text.match(new RegExp('\\b' + className + '\\b', 'g'));
+        
+        found = (test || []).length;
+        
         const startPos = editor.document.positionAt(match.index);
         const endPos = editor.document.positionAt(match.index + match[0].length);
 
