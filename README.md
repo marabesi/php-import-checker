@@ -20,6 +20,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.1.6
+
+- Automatically run the ext when change the active file or opening it in the editor
+
 ### 0.1.5
 
 - The extension add and removes the highlight from a file once the imported class is used in the code ([#9](https://github.com/marabesi/php-import-checker/issues/9)). Previously the user would have to close the file and open again so the extension would highlight the correct imports.
