@@ -14,7 +14,7 @@ suite('php-import-checker extension behavior', () => {
         // { snippet: 'snippet4.php', unused: 5 },
         { snippet: 'snippet5.php', unused: 5 },
         { snippet: 'snippet6.php', unused: 0 },
-        { snippet: 'snippet7.php', unused: 0 },
+        { snippet: 'snippet7.php', unused: 1 },
         { snippet: 'snippet8.php', unused: 0 },
     ];
 
@@ -26,10 +26,14 @@ suite('php-import-checker extension behavior', () => {
     
             const document = await vscode.workspace.openTextDocument(uri);
             const editor = await vscode.window.showTextDocument(document);
-            
+
             const found = myExtension.findMatch(editor, editor.document.getText());
     
-            assert.equal(testCase.unused, found.length);
+            vscode.commands.executeCommand('workbench.action.closeActiveEditor');
+
+            vscode.workspace.onDidCloseTextDocument(() => {
+                assert.equal(testCase.unused, found.length);
+            })
         });
     })
 });
