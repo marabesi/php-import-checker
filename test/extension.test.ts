@@ -16,6 +16,7 @@ suite('php-import-checker extension behavior', () => {
         { snippet: 'snippet6.php', unused: 0 },
         // { snippet: 'snippet7.php', unused: 1 },
         { snippet: 'snippet8.php', unused: 0 },
+        { snippet: 'snippet9.php', unused: 0 },
     ];
 
     dataProvider.forEach((testCase) => {
