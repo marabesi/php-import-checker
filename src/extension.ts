@@ -7,9 +7,6 @@
 
 import * as vscode from 'vscode';
 
-let context = 0;
-
-// keeps all the unused classes to highlight
 let ranges: vscode.Range[] = [];
 
 const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
@@ -31,13 +28,15 @@ export function activate(context: vscode.ExtensionContext) {
 
     vscode.workspace.onDidSaveTextDocument(callback => {
         generateHighlighting();
-    });
+    }, null, context.subscriptions);
 
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         generateHighlighting();
     });
 
     context.subscriptions.push(disposable);
+
+    generateHighlighting();
 }
 
 function generateHighlighting() {
@@ -47,32 +46,21 @@ function generateHighlighting() {
         return;
     }
 
-    let timeout: any = null;
-    function triggerUpdateDecorations() {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
+    console.log('Searching unused classes...')
 
-        timeout = setTimeout(updateDecorations, 500);
+    if (!editor) {
+        return;
     }
 
-    triggerUpdateDecorations();
+    ranges = [];
 
-    function updateDecorations() {
-        if (!editor) {
-            return;
-        }
+    const text = editor.document.getText();
 
-        // clean up the found matches
-        ranges = [];
+    resetDecorations(editor);
 
-        const text = editor.document.getText();
-        const search = findMatch(editor, text);
+    findMatch(editor, text);
 
-        search.forEach((match: any) => {
-            highlightSelections(editor, match.ranges);
-        });
-    }
+    highlightSelections(editor);
 }
 
 export function findMatch(editor: vscode.TextEditor, text: string): any {
@@ -91,8 +79,10 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
             let splitAlias = className.split(' as ');
             className = splitAlias[splitAlias.length - 1].trim();
         }
+
+        const reg = new RegExp('\\b' + className + '\\b', 'g');
         
-        let test = text.match(new RegExp('\\b' + className + '\\b', 'g'));
+        const test = text.match(reg);
         
         found = (test || []).length;
         
@@ -104,8 +94,9 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
                 isAlias: isAlias,
                 classname: className,
                 found: found,
-                ranges: [new vscode.Range(startPos, endPos)]
             });
+
+            ranges.push(new vscode.Range(startPos, endPos));
         }
 
         isAlias = false;
@@ -121,21 +112,10 @@ function resetAllDecorations() {
 }
 
 function resetDecorations(textEditor: vscode.TextEditor) {
-    highlightSelections(textEditor, []);
+    highlightSelections(textEditor);
 }
 
-function highlightSelections(editor: vscode.TextEditor, selections: vscode.Range[]) {
-    selections.forEach(s => {
-        if (context < 0) {
-            ranges.push(s);
-        } else {
-            ranges.push(new vscode.Range(
-                new vscode.Position(Math.max(s.start.line - context, 0), 0),
-                new vscode.Position(s.end.line + context, Number.MAX_VALUE)
-            ));
-        }
-    });
-
+function highlightSelections(editor: vscode.TextEditor) {
     editor.setDecorations(unusedNamespaceDecorationType, ranges);
 }
 
