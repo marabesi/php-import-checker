@@ -20,6 +20,11 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.1.7
+
+- Fix highlight on/off when there is only one `use` statement. Previously
+for this to work the user would have to change the tab
+
 ### 0.1.6
 
 - Automatically run the ext when change the active file or opening it in the editor
