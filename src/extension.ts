@@ -7,9 +7,10 @@
 
 import * as vscode from 'vscode';
 
+const hexRgb = require('hex-rgb');
 let ranges: vscode.Range[] = [];
 
-const unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
+let unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
     backgroundColor: 'rgba(255,0,0, 0.5)',
     light: {
         borderColor: 'darkblue'
@@ -30,13 +31,36 @@ export function activate(context: vscode.ExtensionContext) {
         generateHighlighting();
     }, null, context.subscriptions);
 
+    vscode.workspace.onDidChangeConfiguration(e => {
+        setupConfiguration();
+    }, null, context.subscriptions);
+
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         generateHighlighting();
     });
 
     context.subscriptions.push(disposable);
 
+    setupConfiguration();
     generateHighlighting();
+}
+
+function setupConfiguration() {
+    const conf: any = vscode.workspace.getConfiguration().get('php.import.highlight');
+
+    if (conf && conf.color) {
+        const color = conf.color;
+
+        const currentColor = hexRgb(color);
+
+        const newColor = `rgba(${currentColor.red}, ${currentColor.green}, ${currentColor.blue}, 0.5)`;
+
+        console.log('new color highlight: ', newColor);
+
+        unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
+            backgroundColor: newColor,
+        });
+    }
 }
 
 function generateHighlighting() {
@@ -46,12 +70,12 @@ function generateHighlighting() {
         return;
     }
 
-    console.log('Searching unused classes...')
+    console.log('Searching unused classes...');
 
     if (!editor) {
         return;
     }
-
+    
     ranges = [];
 
     const text = editor.document.getText();

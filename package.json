@@ -37,5 +37,8 @@
         "mocha": "^5.2.0",
         "typescript": "^2.8.3",
         "vscode": "^1.1.18"
+    },
+    "dependencies": {
+        "hex-rgb": "^3.0.0"
     }
 }
