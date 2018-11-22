@@ -12,13 +12,24 @@ php-import-checker helps you know when a given class is imported but not used, p
 
 For example if there is an image subfolder under your extension project workspace:
 
-![High light unused imports](demo.gif)
+![Highlight unused imports](demo.gif)
+
+- Change the color to the one you want to
+
+![Change highlight color](demo-color.gif)
+
+
 
 ## Requirements
 
 Visual Code 1.14 +
 
 ## Changelog
+
+### 0.2.7
+
+- Feature to change the highlight color based on the user configuration file
+(`php.import.highligh`)
 
 ### 0.1.7
 
