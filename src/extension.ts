@@ -6,19 +6,10 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import { unusedNamespaceDecorationType, setupConfiguration  } from './configuration';
 
-const hexRgb = require('hex-rgb');
+let currentDecoration = unusedNamespaceDecorationType;
 let ranges: vscode.Range[] = [];
-
-let unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
-    backgroundColor: 'rgba(255,0,0, 0.5)',
-    light: {
-        borderColor: 'darkblue'
-    },
-    dark: {
-        borderColor: 'lightblue'
-    }
-});
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('php-import-checker" is now active!');
@@ -32,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
     }, null, context.subscriptions);
 
     vscode.workspace.onDidChangeConfiguration(e => {
-        setupConfiguration();
+        currentDecoration = setupConfiguration();
     }, null, context.subscriptions);
 
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
@@ -41,26 +32,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(disposable);
 
-    setupConfiguration();
+    currentDecoration = setupConfiguration();
     generateHighlighting();
-}
-
-function setupConfiguration() {
-    const conf: any = vscode.workspace.getConfiguration().get('php.import.highlight');
-
-    if (conf && conf.color) {
-        const color = conf.color;
-
-        const currentColor = hexRgb(color);
-
-        const newColor = `rgba(${currentColor.red}, ${currentColor.green}, ${currentColor.blue}, 0.5)`;
-
-        console.log('new color highlight: ', newColor);
-
-        unusedNamespaceDecorationType = vscode.window.createTextEditorDecorationType({
-            backgroundColor: newColor,
-        });
-    }
 }
 
 function generateHighlighting() {
@@ -140,7 +113,7 @@ function resetDecorations(textEditor: vscode.TextEditor) {
 }
 
 function highlightSelections(editor: vscode.TextEditor) {
-    editor.setDecorations(unusedNamespaceDecorationType, ranges);
+    editor.setDecorations(currentDecoration, ranges);
 }
 
 export function deactivate() {
