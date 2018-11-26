@@ -35,7 +35,7 @@ Visual Code 1.14 +
 ### 0.2.7
 
 - Feature to change the highlight color based on the user configuration file
-(`php.import.highligh`)
+(`php.import.highlight`)
 
 ### 0.1.7
 
