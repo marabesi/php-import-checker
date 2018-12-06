@@ -20,17 +20,20 @@ For example if there is an image subfolder under your extension project workspac
 
 ## Known Issues
 
-- The extension does not support traits. ([#3](https://github.com/marabesi/php-import-checker/issues/3))
 - If the imported class with `use` is inside a comment block, the extension is
 not going to highlight as a unused class. ([#10](https://github.com/marabesi/php-import-checker/issues/10))
-
-
 
 ## Requirements
 
 Visual Code 1.14 +
 
 ## Changelog
+
+### 0.2.8
+
+- Change regex to only match "use" at the start of a line ([#12](https://github.com/marabesi/php-import-checker/issues/12))
+- Fix: wrong hightlight when using Trait ([#12](https://github.com/marabesi/php-import-checker/issues/12))
+- Fix: typo in the configuration property ([#c0f65f9](https://github.com/marabesi/php-import-checker/commit/c0f65f987aee7473911db341862b3515828e0588))
 
 ### 0.2.7
 
