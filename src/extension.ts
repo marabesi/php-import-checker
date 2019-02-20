@@ -61,7 +61,7 @@ function generateHighlighting() {
 }
 
 export function findMatch(editor: vscode.TextEditor, text: string): any {
-    const regEx = /^\ {0,3}use (.*);/mg;
+    const regEx = /^\ {0,3}use (?:function )?(.*);/mg;
     let match;
     let matches = [];
     let isAlias = false;
