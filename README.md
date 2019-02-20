@@ -29,6 +29,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.2.9
+
+- Support added to "use function" statement ([#15](https://github.com/marabesi/php-import-checker/issues/15))
+
 ### 0.2.8
 
 - Change regex to only match "use" at the start of a line ([#12](https://github.com/marabesi/php-import-checker/issues/12))
