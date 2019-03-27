@@ -48,7 +48,7 @@ function generateHighlighting() {
     if (!editor) {
         return;
     }
-    
+
     ranges = [];
 
     const text = editor.document.getText();
@@ -61,11 +61,11 @@ function generateHighlighting() {
 }
 
 export function findMatch(editor: vscode.TextEditor, text: string): any {
-    const regEx = /^\ {0,3}use (?:function )?(.*);/mg;
+    const regEx = /^\ {0,3}use (?:(?:function|const) )?(.*);/mg;
     let match;
     let matches = [];
     let isAlias = false;
-    
+
     while (match = regEx.exec(text)) {
         let found = 0;
         let splitNameSpace = match[1].split('\\');
@@ -78,11 +78,11 @@ export function findMatch(editor: vscode.TextEditor, text: string): any {
         }
 
         const reg = new RegExp('\\b' + className + '\\b', 'g');
-        
+
         const test = text.match(reg);
-        
+
         found = (test || []).length;
-        
+
         const startPos = editor.document.positionAt(match.index);
         const endPos = editor.document.positionAt(match.index + match[0].length);
 

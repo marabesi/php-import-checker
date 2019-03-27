@@ -19,6 +19,7 @@ suite('php-import-checker extension behavior', () => {
         { snippet: 'snippet9.php', unused: 0 },
         { snippet: 'snippet10.php', unused: 1 },
         { snippet: 'snippet11.php', unused: 2 },
+        { snippet: 'snippet12.php', unused: 1 },
     ];
 
     dataProvider.forEach((testCase) => {
@@ -26,12 +27,12 @@ suite('php-import-checker extension behavior', () => {
             const uri = vscode.Uri.file(
                 path.join(__dirname + testFolderLocation + testCase.snippet)
             );
-    
+
             const document = await vscode.workspace.openTextDocument(uri);
             const editor = await vscode.window.showTextDocument(document);
 
             const found = myExtension.findMatch(editor, editor.document.getText());
-    
+
             assert.equal(testCase.unused, found.length);
         });
     });
