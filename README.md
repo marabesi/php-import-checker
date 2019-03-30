@@ -29,6 +29,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.3.0
+
+- Support added to "use const" statement ([#18](https://github.com/marabesi/php-import-checker/pull/18))
+
 ### 0.2.9
 
 - Support added to "use function" statement ([#15](https://github.com/marabesi/php-import-checker/issues/15))
