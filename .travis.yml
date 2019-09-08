@@ -11,10 +11,11 @@ os:
 matrix:
   allow_failures:
     - os: windows
+services:
+  - xvfb
 before_install:
   - if [ $TRAVIS_OS_NAME == "linux" ]; then
       export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
-      sh -e /etc/init.d/xvfb start;
       sleep 3;
     fi
 install:
