@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
         currentDecoration = setupConfiguration();
     }, null, context.subscriptions);
 
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
+    let disposable = vscode.commands.registerCommand('extension.php-import-checker', () => {
         generateHighlighting();
     });
 
