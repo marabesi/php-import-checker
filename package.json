@@ -13,14 +13,14 @@
     ],
     "repository": "https://github.com/marabesi/php-import-checker.git",
     "activationEvents": [
-        "onCommand:extension.sayHello",
+        "onCommand:extension.php-import-checker",
         "onLanguage:php"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
+                "command": "extension.php-import-checker",
                 "title": "Check PHP import"
             }
         ]
