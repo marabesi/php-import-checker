@@ -35,7 +35,7 @@
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.12.18",
         "mocha": "^6.2.2",
-        "typescript": "^3.7.4",
+        "typescript": "^3.7.5",
         "vscode": "^1.1.36"
     },
     "dependencies": {
