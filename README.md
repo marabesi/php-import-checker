@@ -29,6 +29,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.4.0
+
+- Updated project dependencies
+
 ### 0.3.0
 
 - Support added to "use const" statement ([#18](https://github.com/marabesi/php-import-checker/pull/18))
