@@ -24,7 +24,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run build
+        npm run vscode:prepublish
         npm test
       env:
         CI: true
