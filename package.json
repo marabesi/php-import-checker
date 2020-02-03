@@ -33,7 +33,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^7.0.1",
-        "@types/node": "^13.5.3",
+        "@types/node": "^13.7.0",
         "mocha": "^7.0.1",
         "typescript": "^3.7.5",
         "vscode": "^1.1.36"
