@@ -31,6 +31,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.5.0
+
+- Updated project dependencies (npm audit fixes)
+
 ### 0.4.0
 
 - Updated project dependencies
