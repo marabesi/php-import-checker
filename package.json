@@ -2,7 +2,7 @@
     "name": "php-import-checker",
     "displayName": "PHP import checker",
     "description": "Know when you are importing a class and is not using it in the file, easy and fast, inspired by PHPStorm",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "publisher": "marabesi",
     "icon": "arrows.png",
     "engines": {
