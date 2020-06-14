@@ -80,16 +80,16 @@ export function extractUnusedImports(sourceCode: string) {
             .map(item => item && item.expr && item.expr.what ? item.expr.what.name : [])
             .forEach((item: any) => unusedImports.push(item))
 
-        for (const ops of callInsideMethods) {
-            if (ops) {
-                const arg = ops.map((item: any) => item.name)
+        for (const argumentsCall of callInsideMethods) {
+            if (argumentsCall) {
+                argumentsCall.map((item: any) => item.name)
                     .filter((item: any) => item !== null)
-                arg.forEach((item: any) => unusedImports.push(item))
+                    .forEach((item: any) => unusedImports.push(item))
             }
         }
 
-        for (const invokcation of calls) {
-            unusedImports.push(invokcation.expression.what.name);
+        for (const invokation of calls) {
+            unusedImports.push(invokation.expression.what.name);
         }
 
         for (const useStatement of normalizeUseStatements) {
