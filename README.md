@@ -31,6 +31,10 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.6.0
+
+- Extension rewrite to use [php-parser](https://www.npmjs.com/package/php-parser) instead of regex
+
 ### 0.5.0
 
 - Updated project dependencies (npm audit fixes)
