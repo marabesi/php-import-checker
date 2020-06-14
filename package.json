@@ -30,13 +30,15 @@
         "compile": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test:integration": "node ./node_modules/vscode/bin/test --disable-extensions",
-        "test:unit": "mocha -r ts-node/register mocha/unit/**/**.test.ts"
+        "test:unit": "mocha -r ts-node/register mocha/unit/**/**.test.ts",
+        "test:unit:coverage": "nyc --reporter=text mocha -r ts-node/register mocha/unit/**/**.test.ts"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.155",
         "@types/mocha": "^7.0.2",
         "@types/node": "^14.0.13",
         "mocha": "^7.2.0",
+        "nyc": "^15.1.0",
         "ts-node": "^8.10.2",
         "typescript": "^3.9.3",
         "vscode": "^1.1.37"
