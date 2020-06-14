@@ -6,7 +6,8 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { unusedNamespaceDecorationType, setupConfiguration  } from './configuration';
+import { unusedNamespaceDecorationType, setupConfiguration } from './configuration';
+import { extractUnusedImports } from './extractor';
 
 let currentDecoration = unusedNamespaceDecorationType;
 let ranges: vscode.Range[] = [];
@@ -33,6 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
 
     currentDecoration = setupConfiguration();
+
     generateHighlighting();
 }
 
@@ -55,51 +57,23 @@ function generateHighlighting() {
 
     resetDecorations(editor);
 
-    findMatch(editor, text);
+    drawUnusedImports(editor, text);
 
     highlightSelections(editor);
 }
 
-export function findMatch(editor: vscode.TextEditor, text: string): any {
-    const regEx = /^\ {0,3}use (?:(?:function|const) )?(.*);/mg;
-    let match;
-    let matches = [];
-    let isAlias = false;
+export function drawUnusedImports(editor: vscode.TextEditor, text: string): any {
+    const unused = extractUnusedImports(text);
 
-    while (match = regEx.exec(text)) {
-        let found = 0;
-        let splitNameSpace = match[1].split('\\');
-        let className = splitNameSpace[splitNameSpace.length - 1];
+    console.log(`Found ${unused.length} unused classe (s)`)
 
-        if (className.search(/ as /) > -1) {
-            isAlias = true;
-            let splitAlias = className.split(' as ');
-            className = splitAlias[splitAlias.length - 1].trim();
-        }
-
-        const reg = new RegExp('\\b' + className + '\\b', 'g');
-
-        const test = text.match(reg);
-
-        found = (test || []).length;
-
-        const startPos = editor.document.positionAt(match.index);
-        const endPos = editor.document.positionAt(match.index + match[0].length);
-
-        if (match[0].length && found < 2) {
-            matches.push({
-                isAlias: isAlias,
-                classname: className,
-                found: found,
-            });
-
-            ranges.push(new vscode.Range(startPos, endPos));
-        }
-
-        isAlias = false;
+    for (const drawUnused of unused) {
+        const startPos = editor.document.positionAt(drawUnused.loc.start.offset)
+        const endPos = editor.document.positionAt(drawUnused.loc.end.offset + 1);
+        ranges.push(new vscode.Range(startPos, endPos));
     }
 
-    return matches;
+    return unused;
 }
 
 function resetAllDecorations() {
