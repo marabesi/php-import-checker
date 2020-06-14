@@ -25,7 +25,8 @@ jobs:
       run: |
         npm install
         npm run vscode:prepublish
-        npm test
+        npm test:unit:coverage
+        npm test:integration
       env:
         CI: true
         DISPLAY: ':99.0'
