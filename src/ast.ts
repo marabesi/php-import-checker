@@ -1,30 +1,31 @@
 import { Node, Block } from 'php-parser';
 import { Walker } from './types/Walker';
+import { PhpUseItem, PhpClassMethod, PhpExpression, PhpTypes } from './types/Nodes';
 
 export function walker(nodes: Block): Walker {
-    const methods: any = [];
-    const namespaces: any = [];
-    const expressions: any = [];
+    const methods: PhpClassMethod[] = [];
+    const namespaces: PhpUseItem[] = [];
+    const expressions: PhpExpression[] = [];
 
     function walk(nodes: any) {
-        if (nodes.kind === 'expressionstatement') {
+        if (nodes.kind === PhpTypes.PHP_EXPRESSION) {
             expressions.push(nodes);
         }
 
-        if (nodes.kind === 'method' && nodes.body) {
+        if (nodes.kind === PhpTypes.PHP_METHOD && nodes.body) {
             nodes.body.children.forEach((node: Node) => walk(node))
         }
 
-        if (nodes.kind === 'usegroup') {
+        if (nodes && nodes.kind === PhpTypes.PHP_USE) {
             namespaces.push(nodes);
         }
 
-        if ((nodes.kind === 'class' || nodes.kind === 'trait') && nodes.body) {
+        if (nodes.body && (nodes.kind === PhpTypes.PHP_CLASS || nodes.kind === PhpTypes.PHP_TRAIT)) {
             methods.push(nodes.body);
             nodes.body.forEach((node: Node) => walk(node))
         }
 
-        if (nodes.kind === 'interface') {
+        if (nodes.kind === PhpTypes.PHP_INTERFACE) {
             methods.push(nodes.body);
         }
 

@@ -8,6 +8,7 @@
 import * as vscode from 'vscode';
 import { unusedNamespaceDecorationType, setupConfiguration } from './configuration';
 import { extractUnusedImports } from './extractor';
+import { PhpUseItem } from './types/Nodes';
 
 let currentDecoration = unusedNamespaceDecorationType;
 let ranges: vscode.Range[] = [];
@@ -62,18 +63,18 @@ function generateHighlighting() {
     highlightSelections(editor);
 }
 
-export function drawUnusedImports(editor: vscode.TextEditor, text: string): any {
-    const unused = extractUnusedImports(text);
+export function drawUnusedImports(editor: vscode.TextEditor, text: string): PhpUseItem[] {
+    const unusedList : PhpUseItem[] = extractUnusedImports(text);
 
-    console.log(`Found ${unused.length} unused classe (s)`)
+    console.log(`Found ${unusedList.length} unused classe (s)`)
 
-    for (const drawUnused of unused) {
-        const startPos = editor.document.positionAt(drawUnused.loc.start.offset)
-        const endPos = editor.document.positionAt(drawUnused.loc.end.offset + 1);
+    for (const drawUnused of unusedList) {
+        const startPos = editor.document.positionAt(drawUnused.loc.start.offset.valueOf())
+        const endPos = editor.document.positionAt(drawUnused.loc.end.offset.valueOf() + 1);
         ranges.push(new vscode.Range(startPos, endPos));
     }
 
-    return unused;
+    return unusedList;
 }
 
 function resetAllDecorations() {
