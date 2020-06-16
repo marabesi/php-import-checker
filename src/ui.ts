@@ -7,7 +7,7 @@
 
 import * as vscode from 'vscode';
 import { unusedNamespaceDecorationType, setupConfiguration } from './configuration';
-import { extractUnusedImports } from './extractor';
+import { extractUnusedImports } from './core';
 import { PhpUseItem } from './types/Nodes';
 
 let currentDecoration = unusedNamespaceDecorationType;

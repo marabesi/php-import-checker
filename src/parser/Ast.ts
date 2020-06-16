@@ -1,6 +1,6 @@
 import { Node, Block } from 'php-parser';
-import { Walker } from './types/Walker';
-import { PhpUseItem, PhpClassMethod, PhpExpression, PhpTypes } from './types/Nodes';
+import { Walker } from '../types/Walker';
+import { PhpUseItem, PhpClassMethod, PhpExpression, PhpTypes } from '../types/Nodes';
 
 export function walker(nodes: Block): Walker {
     const methods: PhpClassMethod[] = [];

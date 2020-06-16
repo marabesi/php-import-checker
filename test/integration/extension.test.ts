@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { dataProvider } from '../dataProvider';
-import * as myExtension from '../../src/extension';
+import * as myExtension from '../../src/ui';
 
 const testFolderLocation = '/../../../test/examples/'
 
