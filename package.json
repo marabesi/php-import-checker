@@ -44,7 +44,7 @@
         "vscode": "^1.1.37"
     },
     "dependencies": {
-        "hex-rgb": "^4.2.0",
+        "hex-rgb": "^4.3.0",
         "lodash": "^4.17.21",
         "php-parser": "^3.0.2"
     }
