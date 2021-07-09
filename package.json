@@ -34,7 +34,7 @@
         "test:unit:coverage": "nyc --reporter=text mocha -r ts-node/register mocha/unit/**/**.test.ts"
     },
     "devDependencies": {
-        "@types/lodash": "^4.14.170",
+        "@types/lodash": "^4.14.171",
         "@types/mocha": "^8.2.3",
         "@types/node": "^15.14.0",
         "mocha": "^9.0.2",
