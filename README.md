@@ -1,6 +1,6 @@
 # php-import-checker
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6369463772924ee984769c9eddde0cf4)](https://www.codacy.com/app/matheus-marabesi/php-import-checker?utm_source=github.com&utm_medium=referral&utm_content=marabesi/php-import-checker&utm_campaign=badger)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/219306c872394844a218ea3918042035)](https://www.codacy.com/gh/marabesi/php-import-checker/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marabesi/php-import-checker&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/marabesi/php-import-checker.svg?branch=master)](https://travis-ci.org/marabesi/php-import-checker)
 [![ Vscode installs](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)
   
