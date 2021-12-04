@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Static call to imported class D in a grouped namespace, as it is being used
+ * it should not highlight any use statement.
+ */
+
 namespace Test\Treta {
     class D {
         public static function mac() {
@@ -8,10 +13,6 @@ namespace Test\Treta {
     }
 }
 
-/**
- * Static call to imported class D, as it is being used
- * it should not hightlight any use statement.
- */
 
 namespace MyModule {
 
