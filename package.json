@@ -16,7 +16,7 @@
         "onCommand:extension.php-import-checker",
         "onLanguage:php"
     ],
-    "main": "./out/src/extension",
+    "main": "./out/src/ui",
     "contributes": {
         "commands": [
             {
