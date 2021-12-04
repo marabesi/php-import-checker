@@ -32,6 +32,11 @@ Visual Code 1.14 +
 
 ## Changelog
 
+### 0.7.0
+
+- Security fixes (via dependabot)
+- Extension rewritten from scratch to use php-parser
+
 ### 0.6.0
 
 - Extension rewrite to use [php-parser](https://www.npmjs.com/package/php-parser) instead of regex
