@@ -6,7 +6,7 @@
     "publisher": "marabesi",
     "icon": "arrows.png",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.60.0"
     },
     "categories": [
         "Other"
