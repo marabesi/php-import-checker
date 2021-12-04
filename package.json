@@ -32,7 +32,8 @@
         "test:integration": "node ./node_modules/vscode/bin/test --disable-extensions",
         "test:unit": "mocha -r ts-node/register mocha/unit/**/**.test.ts",
         "test:unit:coverage": "nyc --reporter=text-lcov mocha -r ts-node/register mocha/unit/**/**.test.ts > lcov.info",
-        "coveralls": "npm run test:unit:coverage && coveralls < lcov.info"
+        "coveralls": "npm run test:unit:coverage && coveralls < lcov.info",
+        "test:all": "npm run test:unit && npm run test:integration"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.177",
