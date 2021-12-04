@@ -36,5 +36,8 @@ jobs:
 
     - name: npm test
       run: |
-        npm run test:unit:coverage
         npm run test:integration
+
+    - name: npm coverage
+      run: |
+        npm run test:unit:coverage
