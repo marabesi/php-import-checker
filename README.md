@@ -21,11 +21,6 @@ For example if there is an image subfolder under your extension project workspac
 
 <a href="https://www.buymeacoffee.com/marabesi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"></a>
 
-## Known Issues
-
-- If the imported class with `use` is inside a comment block, the extension is
-not going to highlight as a unused class. ([#10](https://github.com/marabesi/php-import-checker/issues/10))
-
 ## Requirements
 
 Visual Code 1.6 +
