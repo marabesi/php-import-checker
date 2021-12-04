@@ -52,4 +52,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: php-import-checker-vscode-extension
-        path: *.vsix
+        path: ./*.vsix
