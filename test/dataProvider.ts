@@ -22,4 +22,5 @@ export const dataProvider = [
     { snippet: 'snippet21.php', unused: 1 },
     { snippet: 'snippet22.php', unused: 0 },
     { snippet: 'snippet23.php', unused: 3 },
+    { snippet: 'snippet24.php', unused: 1 },
 ];
