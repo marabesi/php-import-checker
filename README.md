@@ -3,7 +3,8 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/219306c872394844a218ea3918042035)](https://www.codacy.com/gh/marabesi/php-import-checker/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marabesi/php-import-checker&amp;utm_campaign=Badge_Grade)
 [![Build status](https://github.com/marabesi/php-import-checker/actions/workflows/nodejs.yml/badge.svg)](https://github.com/marabesi/php-import-checker/actions/workflows/nodejs.yml)
 [![ Vscode installs](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)
-  
+[![Coverage Status](https://coveralls.io/repos/github/marabesi/php-import-checker/badge.svg?branch=)](https://coveralls.io/github/marabesi/php-import-checker?branch=)
+
 php-import-checker helps you know when a given class is imported but not used, providing a easy way to keep your code clean and organized.
 
 ## Features
