@@ -66,12 +66,14 @@ function generateHighlighting() {
 export function drawUnusedImports(editor: vscode.TextEditor, text: string): PhpUseItem[] {
     const unusedList : PhpUseItem[] = extractUnusedImports(text);
 
-    console.log(`Found ${unusedList.length} unused classe (s)`)
+    console.log(`Found ${unusedList.length} unused classes (s)`)
 
     for (const drawUnused of unusedList) {
-        const startPos = editor.document.positionAt(drawUnused.loc.start.offset.valueOf())
-        const endPos = editor.document.positionAt(drawUnused.loc.end.offset.valueOf() + 1);
-        ranges.push(new vscode.Range(startPos, endPos));
+        if (drawUnused && drawUnused.loc) {
+            const startPos = editor.document.positionAt(drawUnused.loc.start.offset.valueOf())
+            const endPos = editor.document.positionAt(drawUnused.loc.end.offset.valueOf() + 1);
+            ranges.push(new vscode.Range(startPos, endPos));
+        }
     }
 
     return unusedList;

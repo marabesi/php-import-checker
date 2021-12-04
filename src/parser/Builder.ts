@@ -1,4 +1,4 @@
-import engine, { Program } from 'php-parser';
+import { Engine, Program } from 'php-parser';
 import { walker } from './Ast';
 import { Namespace } from './Namespace';
 import { Method } from './Method';
@@ -6,7 +6,7 @@ import { Expression } from './Expression';
 import { Walker } from '../types/Walker';
 import { ParsedPhpContent } from '../types/ParsedPhpContent';
 
-const parser = new engine({
+const parser = new Engine({
     parser: {
         extractDoc: false,
     },
@@ -24,7 +24,7 @@ export class Builder {
     private walker: Walker;
 
     constructor(private sourceCode: string) {
-        this.parsedContent = parser.parseCode(this.sourceCode);
+        this.parsedContent = parser.parseCode(this.sourceCode, '');
         this.walker = walker(this.parsedContent);
     }
 
