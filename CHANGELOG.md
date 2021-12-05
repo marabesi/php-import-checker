@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.6.1
+
+- Fix issue with classes being used inside closures
+
 ### 0.6.0
 
 - Security fixes (via dependabot)
