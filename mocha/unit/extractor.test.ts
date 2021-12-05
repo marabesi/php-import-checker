@@ -16,7 +16,7 @@ describe('extract unused', () => {
 
             const foundUnused = extractUnusedImports(phpFile);
 
-            assert.equal(testCase.unused, foundUnused.length);
+            assert.equal(foundUnused.length, testCase.unused);
         });
     });
 });
