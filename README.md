@@ -4,6 +4,7 @@
 [![Build status](https://github.com/marabesi/php-import-checker/actions/workflows/nodejs.yml/badge.svg)](https://github.com/marabesi/php-import-checker/actions/workflows/nodejs.yml)
 [![ Vscode installs](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)](https://vsmarketplacebadge.apphb.com/installs-short/marabesi.php-import-checker.svg)
 [![Coverage Status](https://coveralls.io/repos/github/marabesi/php-import-checker/badge.svg?branch=)](https://coveralls.io/github/marabesi/php-import-checker?branch=)
+<a href="https://www.buymeacoffee.com/marabesi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"></a>
 
 php-import-checker helps you know when a given class is imported but not used, providing a easy way to keep your code clean and organized.
 
@@ -18,8 +19,6 @@ For example if there is an image subfolder under your extension project workspac
 - Change the color to the one you want to
 
 ![Change highlight color](demo-color.gif)
-
-<a href="https://www.buymeacoffee.com/marabesi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"></a>
 
 ## Requirements
 
