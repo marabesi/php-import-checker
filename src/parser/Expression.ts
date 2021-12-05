@@ -5,8 +5,8 @@ export class Expression {
     constructor(private expressions: PhpExpression[]) { }
 
     normalizeExpressions(): string[] {
-        const expressionsCalls = this.expressions.filter((expression: any) => expression.expression.kind === 'call');
-        const expressionsAssigments = this.expressions.filter((expression: any) => expression.expression.kind === 'assign');
+        const expressionsCalls = this.expressions.filter((expression: any) => expression && expression.expression ? expression.expression.kind === 'call' : false);
+        const expressionsAssigments = this.expressions.filter((expression: any) => expression && expression.expression ? expression.expression.kind === 'assign' : false);
         const unusedImports: string[] = [];
 
         expressionsCalls.forEach((expression: any) => {

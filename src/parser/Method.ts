@@ -1,6 +1,7 @@
 import { flatMap } from 'lodash';
 import { Node } from 'php-parser';
 import { PhpClassMethod } from '../types/Nodes';
+import { Expression } from './Expression';
 
 export class Method {
 
@@ -24,7 +25,13 @@ export class Method {
             .map((item: any) => item && item.expr && item.expr.what ? item.expr.what.name : [])
             .forEach((item: any) => unusedImports.push(item))
 
-        return unusedImports;
+        const expression = new Expression(bodyMethods);
+        const unused = expression.normalizeExpressions();
+
+        return [
+            ...unusedImports,
+            ...unused,
+        ];
     }
 
     normalizeCallInsideMethods(): string[] {
