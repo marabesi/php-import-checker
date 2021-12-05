@@ -16,6 +16,20 @@ export class Method {
             .filter(returnType => returnType !== null)
     }
 
+    private extractClassesFromBody(methods: any[]): string[] {
+        const unusedImports: string[] = [];
+        const bodyMethods = flatMap(methods.map((body: any) => (body && body.body ? body.body.children : [])))
+
+        // const callInsideMethods = bodyMethods
+        //     .map((item: any) => item && item.expr ? item.expr.arguments : [])
+
+        bodyMethods
+            .map((item: any) => item && item.expr && item.expr.what ? item.expr.what.name : [])
+            .forEach((item: any) => unusedImports.push(item))
+
+        return unusedImports;
+    }
+
     normalizeCallInsideMethods(): string[] {
         const unusedImports: string[] = [];
         const bodyMethods = flatMap(this.methods.map((body: any) => (body && body.body ? body.body.children : [])))
@@ -27,15 +41,25 @@ export class Method {
             .map(item => item && item.expr && item.expr.what ? item.expr.what.name : [])
             .forEach((item: any) => unusedImports.push(item))
 
+        const callbacks: any[] = [];
+
         for (const argumentsCall of callInsideMethods) {
             if (argumentsCall) {
+                argumentsCall.forEach((argument: any) => {
+                    if (argument && argument.kind === 'closure') {
+                        callbacks.push(argument);
+                    }
+                })
+
                 argumentsCall.map((item: any) => item.name)
                     .filter((item: any) => item !== null)
                     .forEach((item: any) => unusedImports.push(item))
             }
         }
 
-        return unusedImports;
+        const unusedFromCallbacks = this.extractClassesFromBody(callbacks)
+
+        return [...unusedImports, ...unusedFromCallbacks];
     }
 
     normalizeMethodArgumentList(): string[] {
