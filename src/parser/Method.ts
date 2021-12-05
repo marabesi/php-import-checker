@@ -18,10 +18,7 @@ export class Method {
 
     private extractClassesFromBody(methods: any[]): string[] {
         const unusedImports: string[] = [];
-        const bodyMethods = flatMap(methods.map((body: any) => (body && body.body ? body.body.children : [])))
-
-        // const callInsideMethods = bodyMethods
-        //     .map((item: any) => item && item.expr ? item.expr.arguments : [])
+        const bodyMethods = this.flatBody(methods);
 
         bodyMethods
             .map((item: any) => item && item.expr && item.expr.what ? item.expr.what.name : [])
@@ -32,7 +29,7 @@ export class Method {
 
     normalizeCallInsideMethods(): string[] {
         const unusedImports: string[] = [];
-        const bodyMethods = flatMap(this.methods.map((body: any) => (body && body.body ? body.body.children : [])))
+        const bodyMethods = this.flatBody(this.methods);
 
         const callInsideMethods = bodyMethods
             .map(item => item && item.expr ? item.expr.arguments : [])
@@ -77,5 +74,9 @@ export class Method {
             .filter(invokation => invokation && invokation.expression ? invokation.expression.kind === 'call' : null)
             .filter(invokation => invokation !== null)
             .map(invokation => invokation.expression.what.name);
+    }
+
+    private flatBody(methods: any[]): any[] {
+        return flatMap(methods.map((body: any) => (body && body.body ? body.body.children : [])))
     }
 }
