@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Should highlight all the classes, as any ofthem are being used in the code
+ * Should highlight all the classes, as any of them are being used in the code
  */
 
 namespace MyModule;
