@@ -1,14 +1,17 @@
 import * as assert from 'assert';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { dataProvider } from '../dataProvider';
+import { dataProvider, invalidPhpSyntaxDataProvider } from '../dataProvider';
 import * as myExtension from '../../src/ui';
 
 const testFolderLocation = '/../../../test/examples/'
 
 suite('php-import-checker extension behavior', () => {
 
-    dataProvider.forEach((testCase) => {
+    [
+        ...dataProvider,
+        ...invalidPhpSyntaxDataProvider,
+    ].forEach((testCase) => {
         test('Should identify when there is no used class in a text, snippet:::' + testCase.snippet, async () => {
             const uri = vscode.Uri.file(
                 path.join(__dirname + testFolderLocation + testCase.snippet)
