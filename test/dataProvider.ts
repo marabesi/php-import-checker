@@ -23,6 +23,7 @@ export const dataProvider = [
     { snippet: 'snippet23.php', unused: 3 },
     { snippet: 'snippet24.php', unused: 1 },
     { snippet: 'snippet25.php', unused: 2 },
+    { snippet: 'snippet26.php', unused: 3 },
 ]
 
 export const invalidPhpSyntaxDataProvider = [
