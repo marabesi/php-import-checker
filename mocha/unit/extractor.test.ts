@@ -7,42 +7,45 @@ import { extractUnusedImports } from '../../src/core';
 
 const testFolderLocation = '/../../test/examples/'
 
-describe('extract unused', () => {
-    let originalConsole: any
-    let consoleStub = () => {}
+describe('php import checker', () => {
 
-    beforeEach(() => {
-        originalConsole = console.error;
-        console.error = consoleStub
-    })
+    describe('handle php with valid syntax', () => {
+        dataProvider.forEach((testCase) => {
+            it('Should identify when there is no used class in a text, snippet:::' + testCase.snippet, async () => {
+                var phpFile = fs.readFileSync(
+                    path.join(__dirname + testFolderLocation + testCase.snippet)
+                );
 
-    afterEach(() => {
-        console.error = originalConsole
-    })
+                const foundUnused = extractUnusedImports(phpFile);
 
-    dataProvider.forEach((testCase) => {
-        it('Should identify when there is no used class in a text, snippet:::' + testCase.snippet, async () => {
-            var phpFile = fs.readFileSync(
-                path.join(__dirname + testFolderLocation + testCase.snippet)
-            );
-
-            const foundUnused = extractUnusedImports(phpFile);
-
-            assert.equal(foundUnused.length, testCase.unused);
+                assert.equal(foundUnused.length, testCase.unused);
+            });
         });
-    });
+    })
 
-    invalidPhpSyntaxDataProvider.forEach((testCase) => {
-        it('Should identify when there is syntax error, snippet:::' + testCase.snippet, async () => {
-            const spy = sinon.spy(console, 'error');
-            var phpFile = fs.readFileSync(
-                path.join(__dirname + testFolderLocation + testCase.snippet)
-            );
+    describe('handle php with invalid syntax', () => {
+        let originalConsole: any
+        let consoleStub = () => { }
 
-            extractUnusedImports(phpFile);
+        beforeEach(() => {
+            originalConsole = console.error;
+            console.error = consoleStub
+        })
 
-            sinon.assert.calledOnce(spy);
+        afterEach(() => {
+            console.error = originalConsole
+        })
+        invalidPhpSyntaxDataProvider.forEach((testCase) => {
+            it('Should identify when there is syntax error, snippet:::' + testCase.snippet, async () => {
+                const spy = sinon.spy(console, 'error');
+                var phpFile = fs.readFileSync(
+                    path.join(__dirname + testFolderLocation + testCase.snippet)
+                );
+
+                extractUnusedImports(phpFile);
+
+                sinon.assert.calledOnce(spy);
+            });
         });
     });
 });
-
