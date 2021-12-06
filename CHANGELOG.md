@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.6.2
+
+- Redeploy version 0.5.0 (stable) after issues found in the version 0.6.0 and 0.6.1 [#303](https://github.com/marabesi/php-import-checker/issues/303)
+
 ### 0.6.1
 
 - Fix issue with classes being used inside closures
