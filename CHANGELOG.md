@@ -4,6 +4,7 @@
 
 - Fix for highlight when using classes in throw expression
 - Fix for highlight when using classes in catch expression
+- Fix walking the source code tree
 
 ### 0.6.3
 
