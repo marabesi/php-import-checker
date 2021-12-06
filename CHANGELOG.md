@@ -1,5 +1,11 @@
 ## Changelog
 
+### 0.6.3
+
+- Fix highlight when imported class is used with the keyword **extends**.
+- Fix highlight when imported class is used with the keyword **implements**.
+- Fix highlight when imported class is used with the keyword **trait**.
+
 ### 0.6.2
 
 - Redeploy version 0.5.0 (stable) after issues found in the version 0.6.0 and 0.6.1 [#303](https://github.com/marabesi/php-import-checker/issues/303)
