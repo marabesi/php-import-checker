@@ -1,4 +1,4 @@
-import { Node } from 'php-parser';
+import { Node, Class } from 'php-parser';
 
 export enum PhpTypes {
     PHP_EXPRESSION = 'expressionstatement',
@@ -22,6 +22,10 @@ export interface PhpUseItem extends Node {
 export interface PhpClassMethod extends Node {
     body?: Node[];
     arguments?: PhpClassMethodArguments[];
+}
+
+export interface PhpClasses extends Class {
+
 }
 
 export interface PhpExpression extends Node {

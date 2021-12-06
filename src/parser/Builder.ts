@@ -5,6 +5,7 @@ import { Method } from './Method';
 import { Expression } from './Expression';
 import { Walker } from '../types/Walker';
 import { ParsedPhpContent } from '../types/ParsedPhpContent';
+import { PhpClass } from './PhpClass';
 
 const parser = new Engine({
     parser: {
@@ -31,6 +32,7 @@ export class Builder {
     build() : ParsedPhpContent {
         return {
             namespaces: new Namespace(this.walker.namespaces),
+            classes: new PhpClass(this.walker.classes),
             methods: new Method(this.walker.methods),
             expressions: new Expression(this.walker.expressions),
         };

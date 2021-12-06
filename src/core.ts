@@ -9,6 +9,7 @@ export function extractUnusedImports(sourceCode: string): PhpUseItem[] {
 
         const unusedImports: string[] = [
             ...parsedContent.expressions.normalizeExpressions(),
+            ...parsedContent.classes.normalizeClasses(),
             ...parsedContent.methods.normalizeReturnTypes(),
             ...parsedContent.methods.normalizeMethodArgumentList(),
             ...parsedContent.methods.normalizeMethodCalls(),

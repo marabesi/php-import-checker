@@ -1,8 +1,9 @@
 import { Node, Block } from 'php-parser';
 import { Walker } from '../types/Walker';
-import { PhpUseItem, PhpClassMethod, PhpExpression, PhpTypes } from '../types/Nodes';
+import { PhpUseItem, PhpClassMethod, PhpExpression, PhpTypes, PhpClasses } from '../types/Nodes';
 
 export function walker(nodes: Block): Walker {
+    const classes: PhpClasses[] = [];
     const methods: PhpClassMethod[] = [];
     const namespaces: PhpUseItem[] = [];
     const expressions: PhpExpression[] = [];
@@ -18,6 +19,10 @@ export function walker(nodes: Block): Walker {
 
         if (nodes && nodes.kind === PhpTypes.PHP_USE) {
             namespaces.push(nodes);
+        }
+
+        if (nodes.kind === PhpTypes.PHP_CLASS) {
+            classes.push(nodes);
         }
 
         if (nodes.body && (nodes.kind === PhpTypes.PHP_CLASS || nodes.kind === PhpTypes.PHP_TRAIT)) {
@@ -40,5 +45,6 @@ export function walker(nodes: Block): Walker {
         methods,
         namespaces,
         expressions,
+        classes
     }
 }
