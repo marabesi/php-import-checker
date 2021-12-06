@@ -16,7 +16,7 @@ export class Expression {
         });
 
         expressionsAssigments.forEach((expression: any) => {
-            if (expression && expression.expression && expression.expression.right) {
+            if (expression && expression.expression && expression.expression.right && expression.expression.right.what) {
                 unusedImports.push(expression.expression.right.what.name);
             }
         })
