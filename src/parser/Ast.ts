@@ -16,10 +16,11 @@ export function walker(nodes: Block): Walker {
         if (nodes.kind === 'try') {
             nodes.catches.forEach((catchItem: any) => {
                 expressions.push(catchItem);
+                walk(catchItem);
             })
         }
 
-        if (nodes.kind === PhpTypes.PHP_METHOD && nodes.body) {
+        if (nodes.kind && nodes.body && nodes.body.children) {
             nodes.body.children.forEach((node: Node) => walk(node))
         }
 
