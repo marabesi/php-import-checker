@@ -7,7 +7,12 @@ export class PhpClass {
     constructor(private useTree: any) { }
 
     normalizeClasses(): string[] {
-        const inheritance: string[] = this.extractExtends()
+        const classFeatures: Identifier[] = [
+            ...this.extractExtends(),
+            ...this.extractImplements(),
+        ];
+
+        const inheritance: string[] = classFeatures 
             .map((item: Identifier) => item ? item.name : '')
             .filter((item: string) => item !== '')
 
@@ -18,6 +23,17 @@ export class PhpClass {
         const extended = this.useTree.map((phpClass: PhpClasses): Identifier[] => {
             if (phpClass.extends) {
                 return [phpClass.extends];
+            }
+            return [];
+        })
+
+        return flatMap(extended);
+    }
+
+    private extractImplements(): Identifier[] {
+        const extended = this.useTree.map((phpClass: PhpClasses): Identifier[] => {
+            if (phpClass.implements) {
+                return phpClass.implements;
             }
             return [];
         })
