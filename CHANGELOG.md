@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.6.4
+
+- Fix for highlight when using classes in throw expression
+
 ### 0.6.3
 
 - Fix highlight when imported class is used with the keyword **extends**.

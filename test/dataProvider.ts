@@ -33,6 +33,7 @@ export const dataProvider = [
     { snippet: 'snippet33.php', unused: 1 },
     { snippet: 'snippet34.php', unused: 0 },
     { snippet: 'snippet35.php', unused: 1 },
+    { snippet: 'snippet36.php', unused: 0 },
 ]
 
 export const invalidPhpSyntaxDataProvider = [

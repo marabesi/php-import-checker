@@ -9,7 +9,7 @@ export function walker(nodes: Block): Walker {
     const expressions: PhpExpression[] = [];
 
     function walk(nodes: any) {
-        if (nodes.kind === PhpTypes.PHP_EXPRESSION) {
+        if (nodes.kind === PhpTypes.PHP_EXPRESSION || nodes.kind === 'throw') {
             expressions.push(nodes);
         }
 
