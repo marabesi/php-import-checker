@@ -1,4 +1,4 @@
-import { flatMap } from 'lodash';
+import { flatMap, pull } from 'lodash';
 import { Identifier } from 'php-parser';
 import { PhpClasses } from '../types/Nodes';
 
@@ -10,9 +10,10 @@ export class PhpClass {
         const classFeatures: Identifier[] = [
             ...this.extractExtends(),
             ...this.extractImplements(),
+            ...this.extractTraitUse(),
         ];
 
-        const inheritance: string[] = classFeatures 
+        const inheritance: string[] = classFeatures
             .map((item: Identifier) => item ? item.name : '')
             .filter((item: string) => item !== '')
 
@@ -39,5 +40,29 @@ export class PhpClass {
         })
 
         return flatMap(extended);
+    }
+
+    private extractTraitUse(): Identifier[] {
+        if (this.useTree && this.useTree.length > 0) {
+            const traits = this.useTree.map((children: any): Identifier[] => {
+                if (children) {
+                    return children.body.filter((bodyItem: any) => bodyItem.kind === 'traituse');
+                }
+                return []
+            })
+            .filter((usedTraits: Identifier[]) => usedTraits.length > 0)
+            .map((traitUse: Identifier[]): Identifier[] => {
+                const pullTraits: Identifier[] = [];
+                traitUse.forEach((trait: any) => {
+                    trait.traits.forEach((traitName: any) => {
+                        pullTraits.push(traitName);
+                    })
+                })
+                return pullTraits;
+            })
+
+            return flatMap(traits);
+        }
+        return []
     }
 }
