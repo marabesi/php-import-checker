@@ -3,6 +3,7 @@
 ### 0.6.4
 
 - Fix for highlight when using classes in throw expression
+- Fix for highlight when using classes in catch expression
 
 ### 0.6.3
 

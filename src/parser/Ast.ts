@@ -13,6 +13,12 @@ export function walker(nodes: Block): Walker {
             expressions.push(nodes);
         }
 
+        if (nodes.kind === 'try') {
+            nodes.catches.forEach((catchItem: any) => {
+                expressions.push(catchItem);
+            })
+        }
+
         if (nodes.kind === PhpTypes.PHP_METHOD && nodes.body) {
             nodes.body.children.forEach((node: Node) => walk(node))
         }

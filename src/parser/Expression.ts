@@ -6,6 +6,7 @@ export class Expression {
 
     normalizeExpressions(): string[] {
         const exceptions = this.expressions.filter((expression: any) => expression && expression.kind && expression.kind === 'throw');
+        const catches = this.expressions.filter((expression: any) => expression && expression.kind && expression.kind === 'catch');
         const expressionsCalls = this.expressions.filter((expression: any) => expression && expression.expression ? expression.expression.kind === 'call' : false);
         const expressionsAssigments = this.expressions.filter((expression: any) => expression && expression.expression ? expression.expression.kind === 'assign' : false);
         const unusedImports: string[] = [];
@@ -13,6 +14,14 @@ export class Expression {
         exceptions.forEach((expression: any) => {
             if (expression && expression.what && expression.what.what) {
                 unusedImports.push(expression.what.what.name);
+            }
+        });
+
+        catches.forEach((expression: any) => {
+            if (expression && expression.what && expression.what.length > 0) {
+                expression.what.forEach((what: any) => {
+                    unusedImports.push(what.name);
+                });
             }
         });
 
