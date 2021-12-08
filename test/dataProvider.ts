@@ -24,6 +24,7 @@ export const dataProvider = [
     // { snippet: 'snippet23.php', unused: 3 }, not supported yet group declaration #16
     // { snippet: 'snippet24.php', unused: 1 }, not supported yet group declaration #16
     // { snippet: 'snippet25.php', unused: 2 }, not supported yet group declaration #16
+    // { snippet: 'snippet42.php', unused: 0 }, not supported yet group declaration #16
     { snippet: 'snippet26.php', unused: 3 },
     { snippet: 'snippet27.php', unused: 0 },
     { snippet: 'snippet28.php', unused: 0 },
@@ -38,4 +39,5 @@ export const dataProvider = [
     { snippet: 'snippet37.php', unused: 0 },
     { snippet: 'snippet38.php', unused: 0 },
     { snippet: 'snippet39.php', unused: 0 },
+    { snippet: 'snippet41.php', unused: 0 },
 ]
