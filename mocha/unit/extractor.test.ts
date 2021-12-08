@@ -1,9 +1,8 @@
 const fs = require('fs');
-import sinon from 'sinon';
 import * as assert from 'assert';
 import * as path from 'path';
-import { dataProvider, invalidPhpSyntaxDataProvider } from '../../test/dataProvider';
-import { extractUnusedImports } from '../../src/core';
+import { dataProvider } from '../../test/dataProvider';
+import { extractUnusedImports } from '../../src/extractUnusedImports';
 
 const testFolderLocation = '/../../test/examples/'
 
@@ -16,36 +15,10 @@ describe('php import checker', () => {
                     path.join(__dirname + testFolderLocation + testCase.snippet)
                 );
 
-                const foundUnused = extractUnusedImports(phpFile);
+                const foundUnused = extractUnusedImports(phpFile.toString());
 
                 assert.equal(foundUnused.length, testCase.unused);
             });
         });
     })
-
-    describe('handle php with invalid syntax', () => {
-        let originalConsole: any
-        let consoleStub = () => { }
-
-        beforeEach(() => {
-            originalConsole = console.error;
-            console.error = consoleStub
-        })
-
-        afterEach(() => {
-            console.error = originalConsole
-        })
-        invalidPhpSyntaxDataProvider.forEach((testCase) => {
-            it('Should identify when there is syntax error, snippet:::' + testCase.snippet, async () => {
-                const spy = sinon.spy(console, 'error');
-                var phpFile = fs.readFileSync(
-                    path.join(__dirname + testFolderLocation + testCase.snippet)
-                );
-
-                extractUnusedImports(phpFile);
-
-                sinon.assert.calledOnce(spy);
-            });
-        });
-    });
 });
