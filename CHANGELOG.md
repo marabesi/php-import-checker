@@ -2,7 +2,7 @@
 
 ### 0.6.5
 
-- Redeploy version 0.5.0 (stable) after issues found in all versions under 0.6.* #303. It turns out that the approach of using a real parser has way more edge cases and uncovered use cases for this extension.
+- Redeploy version 0.5.0 (stable) after issues found in all versions under 0.6.* [#303](https://github.com/marabesi/php-import-checker/issues/303) . It turns out that the approach of using a real parser has way more edge cases and uncovered use cases for this extension.
 
 ### 0.6.4
 
