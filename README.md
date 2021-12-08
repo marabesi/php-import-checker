@@ -8,9 +8,12 @@
 
 php-import-checker helps you know when a given class is imported but not used, providing a easy way to keep your code clean and organized.
 
+[PHP import checker - VScode extension to support PHP developers](https://marabesi.com/php/2020/04/05/php-import-checker-vscode-extension.html)
+
 ## Features
 
 - Highlight every unused class that is imported with `use`
+- Change the color to fit your theme
 
 For example if there is an image subfolder under your extension project workspace:
 
