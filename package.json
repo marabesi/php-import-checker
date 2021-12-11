@@ -33,7 +33,7 @@
         "test:unit": "mocha -r ts-node/register mocha/unit/**/**.test.ts",
         "test:coverage": "nyc --reporter=text mocha -r ts-node/register mocha/unit/**/**.test.ts",
         "test:coveralls:coverage": "nyc --reporter=text-lcov mocha -r ts-node/register mocha/unit/**/**.test.ts > lcov.info",
-        "coveralls": "npm run test:coveralls:coverage && coveralls < lcov.info",
+        "coveralls": "npm run test:coveralls:coverage && coveralls --verbose < lcov.info",
         "test:all": "npm run test:unit && npm run test:integration",
         "package": "vsce package"
     },
