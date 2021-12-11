@@ -6,6 +6,7 @@ env:
   CI: true
   DISPLAY: ':99.0'
   COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+  COVERALLS_GIT_BRANCH: master
 
 jobs:
   build:
