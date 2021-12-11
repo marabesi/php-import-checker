@@ -15,7 +15,7 @@ describe('php import checker', () => {
                     path.join(__dirname + testFolderLocation + testCase.snippet)
                 );
 
-                const foundUnused = extractUnusedImports(phpFile.toString());
+                const foundUnused = extractUnusedImports(phpFile.toString(), {});
 
                 assert.equal(foundUnused.length, testCase.unused);
             });

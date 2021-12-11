@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.8.0
+
+- Fix the missing type `PhpImportConfiguration`
+- Feature flag for the next generation of the import checker
+
 ### 0.7.0
 
 - Minor improvements on the npm commands and test cases

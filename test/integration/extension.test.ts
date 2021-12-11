@@ -19,7 +19,7 @@ suite('php-import-checker extension behavior', () => {
             const document = await vscode.workspace.openTextDocument(uri);
             const editor = await vscode.window.showTextDocument(document);
 
-            const found = myExtension.findMatch(editor, editor.document.getText());
+            const found = myExtension.findMatch(editor, editor.document.getText(), {});
 
             assert.equal(testCase.unused, found.length);
         });

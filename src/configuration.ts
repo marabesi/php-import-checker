@@ -13,12 +13,15 @@ export const unusedNamespaceDecorationType = window.createTextEditorDecorationTy
     }
 });
 
-export function setupConfiguration(): TextEditorDecorationType {
-    const conf: any = workspace.getConfiguration().get('php.import.highlight');
+export type PhpImportCheckerConfiguration = {
+    color?: string;
+    use_next_version?: Boolean;
+}
 
-    if (conf && conf.color) {
+export function setupConfiguration(configuration: PhpImportCheckerConfiguration): TextEditorDecorationType {
+    if (configuration && configuration.color) {
         try {
-            const color = conf.color;
+            const color = configuration.color;
 
             const currentColor = hexRgb(color);
 
