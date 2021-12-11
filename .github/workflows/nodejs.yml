@@ -48,7 +48,6 @@ jobs:
     - name: npm package standalone extension
       if: github.ref == 'refs/heads/master'
       run: |
-      run: |
         npm i -g vsce
         npm run package
 
