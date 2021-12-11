@@ -41,15 +41,19 @@ jobs:
         npm run test:integration
 
     - name: npm coverage
+      if: github.ref == 'refs/heads/master'
       run: |
         npm run coveralls
 
     - name: npm package standalone extension
+      if: github.ref == 'refs/heads/master'
+      run: |
       run: |
         npm i -g vsce
         npm run package
 
     - name: store artifact
+      if: github.ref == 'refs/heads/master'
       uses: actions/upload-artifact@v2
       with:
         name: php-import-checker-vscode-extension
