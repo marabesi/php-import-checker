@@ -9,6 +9,8 @@ function newExtractor(text: string) {
     const builder = new Builder(text);
     const ast:PhpUseItem[] = builder.build().namespaces.normalizeUseStatements();
 
+    const allUsedClasses = ast.map(node => node.name).join(',');
+
     for (const use of ast) {
       let found = 0;
       let splitNameSpace = use.name.split('\\');
@@ -19,15 +21,16 @@ function newExtractor(text: string) {
       const test = text.match(reg);
 
       found = (test || []).length;
+      const classesInNamespace = allUsedClasses.match(new RegExp('\\b' + className + '\\b', 'g')) || [];
 
-      if (found < 2) {
+      if (found <= classesInNamespace.length) {
         matches.push({
           classname: className,
           found: found,
           match: {
             index: use?.loc?.start.offset ?? 0,
             0: {
-              length: use?.loc?.end.offset ?? 0,
+              length: (use?.loc?.end.column ?? 0) - 2,
             }
           },
         });

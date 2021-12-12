@@ -19,7 +19,7 @@ use Test\Treta\A;
 use Test\Treta\D;
 use Test\Treta\C;
 
-class Bssss
-{
-}
+    class Bssss
+    {
+    }
 };
