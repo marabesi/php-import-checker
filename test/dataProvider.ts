@@ -25,7 +25,6 @@ export const dataProvider = [
     { snippet: 'snippet32.php', unused: 0 },
     { snippet: 'snippet33.php', unused: 1 },
     { snippet: 'snippet34.php', unused: 0 },
-    // { snippet: 'snippet35.php', unused: 1 }, not supported yet
     { snippet: 'snippet36.php', unused: 0 },
     { snippet: 'snippet37.php', unused: 0 },
     { snippet: 'snippet38.php', unused: 0 },
@@ -40,7 +39,8 @@ export const dataProviderNextVersion = [
     // { snippet: 'snippet13.php', unused: 1 }, this will require a new options to ignore comments 
     { snippet: 'snippet14.php', unused: 3 },
     // { snippet: 'snippet23.php', unused: 3 }, not supported yet group declaration #16
-    // { snippet: 'snippet24.php', unused: 1 }, not supported yet group declaration #16
-    // { snippet: 'snippet25.php', unused: 2 }, not supported yet group declaration #16
+    { snippet: 'snippet24.php', unused: 1 },
+    { snippet: 'snippet25.php', unused: 2 },
+    // { snippet: 'snippet35.php', unused: 1 },
     { snippet: 'snippet42.php', unused: 0 }
 ];
