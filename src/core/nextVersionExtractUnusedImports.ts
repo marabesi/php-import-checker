@@ -24,7 +24,6 @@ export function newExtractor(text: string) {
 
       if (found <= classesInNamespace.length) {
         matches.push({
-          classname: className,
           found: found,
           match: {
             index: use?.loc?.start.offset ?? 0,

@@ -30,8 +30,6 @@ export function extractUnusedImports(text: string, configuration: PhpImportCheck
 
     if (match[0].length && found < 2) {
       matches.push({
-        isAlias: isAlias,
-        classname: className,
         found: found,
         match,
       });
