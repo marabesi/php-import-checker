@@ -14,6 +14,7 @@ php-import-checker helps you know when a given class is imported but not used, p
 
 - Highlight every unused class that is imported with `use`
 - Change the color to fit your theme
+- opt-in for latest changes and give feedback
 
 For example if there is an image subfolder under your extension project workspace:
 
@@ -22,6 +23,23 @@ For example if there is an image subfolder under your extension project workspac
 - Change the color to the one you want to
 
 ![Change highlight color](demo-color.gif)
+
+## Settings
+
+The settings described in this section go under the json option `php.import.highlight`,
+a basic configuration that would change the highlight color, would be something
+like:
+
+```json
+"php.import.highlight": {
+  "color": "#EDF791"
+}
+```
+
+|Option|Type|Description|
+|------|----|-----------|
+|color|String| Uses the RGB color defined in this option to highlight the unused imports - helpful to match the color with your preferred theme.|
+|use_next_version|Boolean| Opt-in to the latest changes to the extension without breaking current behavior. Note: if you are using this option and find anything wrong, please open an issue.|
 
 ## Requirements
 
