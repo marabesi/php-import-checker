@@ -2,6 +2,8 @@ import { PhpImportCheckerConfiguration } from './configuration';
 import { Builder } from './parser/Builder';
 import { PhpUseItem } from './parser/types/Nodes';
 
+const classUsed = (className: string) => new RegExp('\\b' + className + '\\b', 'g');
+
 function newExtractor(text: string) {
   let matches = [];
 
@@ -16,12 +18,10 @@ function newExtractor(text: string) {
       let splitNameSpace = use.name.split('\\');
       let className = splitNameSpace[splitNameSpace.length - 1];
 
-      const reg = new RegExp('\\b' + className + '\\b', 'g');
-
-      const test = text.match(reg);
+      const test = text.match(classUsed(className));
 
       found = (test || []).length;
-      const classesInNamespace = allUsedClasses.match(new RegExp('\\b' + className + '\\b', 'g')) || [];
+      const classesInNamespace = allUsedClasses.match(classUsed(className)) || [];
 
       if (found <= classesInNamespace.length) {
         matches.push({
@@ -39,7 +39,6 @@ function newExtractor(text: string) {
   } catch (e) {
     console.log(e);
   }
-
 
   return matches;
 }
