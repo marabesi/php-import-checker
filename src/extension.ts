@@ -7,7 +7,7 @@
 
 import * as vscode from 'vscode';
 import { unusedNamespaceDecorationType, setupConfiguration, PhpImportCheckerConfiguration  } from './configuration';
-import { extractUnusedImports } from './extractUnusedImports';
+import { extractUnusedImports } from './core/extractUnusedImports';
 
 let currentDecoration = unusedNamespaceDecorationType;
 let ranges: vscode.Range[] = [];

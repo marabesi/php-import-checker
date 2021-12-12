@@ -1,6 +1,6 @@
-import { PhpImportCheckerConfiguration } from './configuration';
-import { Builder } from './parser/Builder';
-import { PhpUseItem } from './parser/types/Nodes';
+import { PhpImportCheckerConfiguration } from '../configuration';
+import { Builder } from '../parser/Builder';
+import { PhpUseItem } from '../parser/types/Nodes';
 
 const classUsed = (className: string) => new RegExp('\\b' + className + '\\b', 'g');
 

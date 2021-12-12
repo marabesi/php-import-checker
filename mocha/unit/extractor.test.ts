@@ -2,7 +2,7 @@ const fs = require('fs');
 import * as assert from 'assert';
 import * as path from 'path';
 import { dataProvider, dataProviderNextVersion } from '../../test/dataProvider';
-import { extractUnusedImports } from '../../src/extractUnusedImports';
+import { extractUnusedImports } from '../../src/core/extractUnusedImports';
 
 const testFolderLocation = '/../../test/examples/'
 
