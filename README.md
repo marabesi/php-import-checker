@@ -16,14 +16,6 @@ php-import-checker helps you know when a given class is imported but not used, p
 - Change the color to fit your theme
 - opt-in for latest changes and give feedback
 
-For example if there is an image subfolder under your extension project workspace:
-
-![Highlight unused imports](demo.gif)
-
-- Change the color to the one you want to
-
-![Change highlight color](demo-color.gif)
-
 ## Settings
 
 The settings described in this section go under the json option `php.import.highlight`,
@@ -32,7 +24,8 @@ like:
 
 ```json
 "php.import.highlight": {
-  "color": "#EDF791"
+  "color": "#EDF791",
+  "use_next_version": false
 }
 ```
 
@@ -44,3 +37,13 @@ like:
 ## Requirements
 
 Visual Code 1.6 +
+
+## Demos
+
+- Manually invoke the extension checker
+
+![Highlight unused imports](demo.gif)
+
+- Change the color to the one you want to
+
+![Change highlight color](demo-color.gif)
