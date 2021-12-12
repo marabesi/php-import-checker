@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.8.1
+
+- Removed duplicated code on matching unused imports
+- Added new test case for next version extractor
+
 ### 0.8.0
 
 - Fix the missing type `PhpImportConfiguration`
