@@ -16,6 +16,7 @@ export const unusedNamespaceDecorationType = window.createTextEditorDecorationTy
 export type PhpImportCheckerConfiguration = {
     color?: string;
     use_next_version?: Boolean;
+    ignore_comments?: Boolean;
 }
 
 export function setupConfiguration(configuration: PhpImportCheckerConfiguration): TextEditorDecorationType {

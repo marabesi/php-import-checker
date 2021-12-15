@@ -3,7 +3,7 @@ import { newExtractor } from './nextVersionExtractUnusedImports';
 
 export function extractUnusedImports(text: string, configuration: PhpImportCheckerConfiguration) {
   if (configuration.use_next_version) {
-    return newExtractor(text);
+    return newExtractor(text, configuration);
   }
 
   const regEx = /^\ {0,3}use (?:(?:function|const) )?(.*);/mg;

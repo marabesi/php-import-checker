@@ -26,6 +26,7 @@ like:
 "php.import.highlight": {
   "color": "#EDF791",
   "use_next_version": false
+  "ignore_comments": true
 }
 ```
 
@@ -33,6 +34,7 @@ like:
 |------|----|-----------|
 |color|String| Uses the RGB color defined in this option to highlight the unused imports - helpful to match the color with your preferred theme.|
 |use_next_version|Boolean| Opt-in to the latest changes to the extension without breaking current behavior. Note: if you are using this option and find anything wrong, please open an issue.|
+|ignore_comments|Boolean|If set to true, does not take into account commented code - this option only works if **use_next_version** is set to true|
 
 ## Requirements
 

@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.8.2
+
+- Adds `ignore_comments` to ignore imports inside comments
+
 ### 0.8.1
 
 - Removed duplicated code on matching unused imports

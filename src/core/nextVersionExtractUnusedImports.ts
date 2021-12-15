@@ -1,13 +1,19 @@
+import { PhpImportCheckerConfiguration } from '../configuration';
 import { Builder } from '../parser/Builder';
 import { PhpUseItem } from '../parser/types/Nodes';
 
 export const classUsed = (className: string) => new RegExp('\\b' + className + '\\b', 'g');
 
-export function newExtractor(text: string) {
-  let matches = [];
+export function newExtractor(originalText: string, configuration: PhpImportCheckerConfiguration) {
+  const matches = [];
+  let text: string = originalText;
 
   try {
-    const builder = new Builder(text);
+    if (configuration.ignore_comments) {
+      text = text.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/, '');
+    }
+
+    const builder = new Builder(originalText);
     const ast:PhpUseItem[] = builder.build().namespaces.normalizeUseStatements();
 
     const allUsedClasses = ast.map(node => node.name).join(',');

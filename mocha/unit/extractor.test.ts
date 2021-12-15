@@ -32,7 +32,7 @@ describe('php import checker', () => {
                     path.join(__dirname + testFolderLocation + testCase.snippet)
                 );
 
-                const foundUnused = extractUnusedImports(phpFile.toString(), { use_next_version: true });
+                const foundUnused = extractUnusedImports(phpFile.toString(), { use_next_version: true, ignore_comments: true });
 
                 assert.equal(foundUnused.length, testCase.unused);
             });

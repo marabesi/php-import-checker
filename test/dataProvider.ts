@@ -34,13 +34,13 @@ export const dataProvider = [
 
 export const dataProviderNextVersion = [
     { snippet: 'snippet4.php', unused: 5 },
-    // { snippet: 'snippet5.php', unused: 5 }, this will require a new options to ignore comments
+    { snippet: 'snippet5.php', unused: 5 },
     // { snippet: 'snippet7.php', unused: 1 }, this will require a new options to ignore comments
     // { snippet: 'snippet13.php', unused: 1 }, this will require a new options to ignore comments 
     { snippet: 'snippet14.php', unused: 3 },
-    // { snippet: 'snippet23.php', unused: 3 }, not supported yet group declaration #16
+    // { snippet: 'snippet23.php', unused: 3 }, not supported yet group declaration #16 - might be impossible to support that with regex?
+    // { snippet: 'snippet35.php', unused: 1 }, might be impossible to support that with regex?
     { snippet: 'snippet24.php', unused: 1 },
     { snippet: 'snippet25.php', unused: 2 },
-    // { snippet: 'snippet35.php', unused: 1 },
-    { snippet: 'snippet42.php', unused: 0 }
+    { snippet: 'snippet42.php', unused: 2 }
 ];
