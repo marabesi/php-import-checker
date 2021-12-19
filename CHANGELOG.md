@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.8.3
+
+- Security fixes via dependabot
+
 ### 0.8.2
 
 - Adds `ignore_comments` to ignore imports inside comments
