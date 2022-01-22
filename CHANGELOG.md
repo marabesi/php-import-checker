@@ -1,5 +1,13 @@
 ## Changelog
 
+### 0.8.5
+
+- Security fixes via dependabot
+
+### 0.8.4
+
+- Security fixes via dependabot
+
 ### 0.8.3
 
 - Security fixes via dependabot
