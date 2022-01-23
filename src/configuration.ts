@@ -1,6 +1,6 @@
 'use strict';
 
-import { window, workspace, TextEditorDecorationType } from 'vscode';
+import { window, TextEditorDecorationType } from 'vscode';
 const hexRgb = require('hex-rgb');
 
 export const unusedNamespaceDecorationType = window.createTextEditorDecorationType({
