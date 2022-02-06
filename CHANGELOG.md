@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.9.1
+
+- Security fixes via dependabot
+
 ### 0.9.0
 
 - Defaults to the new extractor, fixing a few cases related to group declaration [#16](https://github.com/marabesi/php-import-checker/issues/16)
