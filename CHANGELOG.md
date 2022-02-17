@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.10.0
+
+- Enables web extension
+
 ### 0.9.1
 
 - Security fixes via dependabot
