@@ -4,6 +4,7 @@
     "description": "Know when you are importing a class and is not using it in the file, easy and fast, inspired by PHPStorm",
     "version": "0.9.1",
     "publisher": "marabesi",
+    "browser": "./out/src/extension.js",
     "icon": "arrows.png",
     "engines": {
         "vscode": "^1.60.0"
