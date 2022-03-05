@@ -7,7 +7,7 @@ import * as myExtension from '../../src/extension';
 const testFolderLocation = '/../../../test/examples/'
 
 suite('php-import-checker extension behavior', () => {
-    suite('handle php with valid syntax', () => {
+    suite('handle php with valid syntax, no configuration provided', () => {
         [
             ...dataProvider,
         ].forEach((testCase) => {
@@ -26,7 +26,7 @@ suite('php-import-checker extension behavior', () => {
         });
     });
 
-    suite('use_next_version: handle php with valid syntax', () => {
+    suite('use_next_version: handle php with valid syntax, ignore_comments is true', () => {
         [
             ...dataProvider,
             ...dataProviderNextVersion,
