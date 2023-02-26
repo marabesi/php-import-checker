@@ -44,5 +44,6 @@ export const dataProviderNextVersion = [
     { snippet: 'snippet25.php', unused: 2 },
     { snippet: 'snippet42.php', unused: 2 },
     { snippet: 'snippet43.php', unused: 1 },
-    { snippet: 'snippet44.php', unused: 2 }
+    { snippet: 'snippet44.php', unused: 2 },
+    { snippet: 'snippet45.php', unused: 2 }
 ];
