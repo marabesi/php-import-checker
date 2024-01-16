@@ -41,7 +41,7 @@
     "devDependencies": {
         "@types/lodash": "^4.14.199",
         "@types/mocha": "^10.0.0",
-        "@types/node": "^20.10.4",
+        "@types/node": "^20.11.4",
         "@types/sinon": "^10.0.19",
         "coveralls": "^3.1.1",
         "mocha": "^10.1.0",
