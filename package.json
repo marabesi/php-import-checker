@@ -39,7 +39,7 @@
         "package": "vsce package"
     },
     "devDependencies": {
-        "@types/lodash": "^4.17.4",
+        "@types/lodash": "^4.17.6",
         "@types/mocha": "^10.0.7",
         "@types/node": "^20.14.2",
         "@types/sinon": "^17.0.3",
