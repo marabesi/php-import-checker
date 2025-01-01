@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -57,7 +57,7 @@ jobs:
 
     - name: store artifact
       if: github.ref == 'refs/heads/master'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: php-import-checker-vscode-extension
         path: ./*.vsix
