@@ -55,6 +55,6 @@
     "dependencies": {
         "hex-rgb": "^4.3.0",
         "lodash": "^4.17.21",
-        "php-parser": "^3.2.2"
+        "php-parser": "^3.2.4"
     }
 }
