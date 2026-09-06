@@ -10,13 +10,23 @@
 // to report the results back to the caller. When the tests are finished, return
 // a possible error to the callback or null if none.
 
-var testRunner = require('vscode/lib/testrunner');
+const Mocha = require('mocha');
+const fs = require('fs');
+import { Dirent } from 'fs';
+const path = require('path');
 
-// You can directly control Mocha options by uncommenting the following lines
-// See https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically#set-options for more info
-testRunner.configure({
-    ui: 'tdd', 		// the TDD UI is being used in extension.test.ts (suite, test, etc.)
-    useColors: true // colored output from test results
-});
+export function run(testRoot: string, callback: (error?: Error) => void): void {
+    const mocha = new Mocha({ ui: 'tdd', color: true });
+    const findTestFiles = (directory: string): string[] => fs.readdirSync(directory, { withFileTypes: true })
+        .flatMap((entry: Dirent) => entry.isDirectory()
+            ? findTestFiles(path.resolve(directory, entry.name))
+            : entry.name.endsWith('.test.js')
+                ? [path.resolve(directory, entry.name)]
+                : []);
+    const testFiles = findTestFiles(__dirname);
 
-module.exports = testRunner;
+    testFiles.forEach((file: string) => mocha.addFile(file));
+    mocha.run((failures: number) => callback(failures ? new Error(`${failures} test(s) failed`) : undefined));
+}
+
+module.exports = { run };
