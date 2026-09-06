@@ -8,9 +8,14 @@
         "lib": [
             "es6"
         ],
+        "types": [
+            "node",
+            "mocha"
+        ],
         "sourceMap": true,
         "rootDir": ".",
         "strict": true,
+        "ignoreDeprecations": "6.0"
     },
     "exclude": [
         "node_modules",
