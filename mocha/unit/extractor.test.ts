@@ -38,4 +38,18 @@ describe('php import checker', () => {
             });
         });
     });
+
+    it('Should ignore line comments when configured to ignore comments', () => {
+        const phpFile = `<?php
+use CommentedClass;
+
+class Example {}
+
+// $instance = new CommentedClass();
+`;
+
+        const foundUnused = extractUnusedImports(phpFile, { ignore_comments: true });
+
+        assert.equal(foundUnused.length, 1);
+    });
 });

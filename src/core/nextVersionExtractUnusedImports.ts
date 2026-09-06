@@ -10,7 +10,7 @@ export function newExtractor(originalText: string, configuration: PhpImportCheck
 
   try {
     if (configuration.ignore_comments) {
-      text = text.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/, '');
+      text = text.replace(/\/\*[\s\S]*?\*\/|(^|[^:])\/\/.*$/gm, '$1');
     }
 
     const builder = new Builder(originalText);

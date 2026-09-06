@@ -45,4 +45,32 @@ suite('php-import-checker extension behavior', () => {
             });
         });
     });
+
+    test('Should identify imports used only in PHPDoc and commented-out code', async () => {
+        const document = await vscode.workspace.openTextDocument({
+            language: 'php',
+            content: `<?php
+use Bar4;
+use Bar5;
+use Bar6;
+
+class Example
+{
+    /** @var Bar4 */
+    // $bar5 = new Bar5();
+    /* $bar6 = new Bar6(); */
+}
+`
+        });
+        const editor = await vscode.window.showTextDocument(document);
+
+        const withoutIgnoringComments = myExtension.findMatch(editor, editor.document.getText(), {});
+        const ignoringComments = myExtension.findMatch(editor, editor.document.getText(), {
+            use_next_version: true,
+            ignore_comments: true
+        });
+
+        assert.equal(withoutIgnoringComments.length, 0);
+        assert.equal(ignoringComments.length, 3);
+    });
 });
