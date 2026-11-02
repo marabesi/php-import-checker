@@ -39,7 +39,7 @@
     "devDependencies": {
         "@types/lodash": "^4.17.27",
         "@types/mocha": "^10.0.7",
-        "@types/node": "^26.6.4",
+        "@types/node": "^26.6.6",
         "@types/sinon": "^22.0.2",
         "@types/vscode": "^1.140.0",
         "coveralls": "^3.1.1",
